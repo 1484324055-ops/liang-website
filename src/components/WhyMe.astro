@@ -153,9 +153,26 @@
     font-weight: 500;
   }
 
+  @media (max-width: 1024px) {
+    .whyme-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .whyme-card:nth-child(3) {
+      grid-column: span 2;
+      max-width: 50%;
+      margin: 0 auto;
+    }
+  }
+
   @media (max-width: 768px) {
     .whyme-grid {
       grid-template-columns: 1fr;
+    }
+
+    .whyme-card:nth-child(3) {
+      grid-column: span 1;
+      max-width: 100%;
     }
 
     .whyme-card {

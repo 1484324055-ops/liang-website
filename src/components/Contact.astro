@@ -240,6 +240,16 @@
     transform: translate(2px, -2px);
   }
 
+  @media (max-width: 1024px) {
+    .contact-layout {
+      gap: 60px;
+    }
+
+    .contact-qr-img {
+      max-width: 240px;
+    }
+  }
+
   @media (max-width: 768px) {
     .contact-layout {
       grid-template-columns: 1fr;
@@ -256,8 +266,21 @@
     }
 
     .contact-qr {
-      display: flex;
-      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-qr-img {
+      max-width: 280px;
+    }
+
+    .social-card {
+      padding: 14px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-qr-img {
+      max-width: 240px;
     }
   }
 </style>

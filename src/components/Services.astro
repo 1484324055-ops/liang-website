@@ -210,6 +210,16 @@
     margin-top: auto;
   }
 
+  @media (max-width: 1024px) {
+    .services-grid {
+      gap: 20px;
+    }
+
+    .service-card {
+      padding: 32px 24px;
+    }
+  }
+
   @media (max-width: 768px) {
     .services-grid {
       grid-template-columns: 1fr;
@@ -219,6 +229,10 @@
 
     .service-card {
       padding: 28px 24px;
+    }
+
+    .service-title {
+      font-size: 20px;
     }
   }
 </style>

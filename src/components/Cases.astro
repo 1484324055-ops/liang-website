@@ -278,6 +278,12 @@
     font-weight: 500;
   }
 
+  @media (max-width: 1024px) {
+    .cases-grid {
+      gap: 20px;
+    }
+  }
+
   @media (max-width: 768px) {
     .cases-grid {
       grid-template-columns: 1fr;
@@ -287,8 +293,16 @@
       padding: 24px;
     }
 
+    .case-title {
+      font-size: 18px;
+    }
+
     .case-metrics {
       gap: 16px;
+    }
+
+    .case-metric-value {
+      font-size: 18px;
     }
   }
 </style>
