@@ -1,0 +1,311 @@
+---
+// ROI Calculator — Interactive investment return estimator
+---
+
+<section class="section roi" id="roi">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">投入产出</span>
+      <h2 class="section-title">AI 能帮你省多少钱？</h2>
+      <p class="section-desc">
+        拖动下方滑块，实时计算 AI 赋能后的预期收益。<br />
+        基于真实客户案例数据估算。
+      </p>
+    </div>
+
+    <div class="roi-card card reveal reveal-delay-1">
+      <div class="roi-inputs">
+        <!-- 当前获客成本 -->
+        <div class="roi-input-group">
+          <label class="roi-label">
+            <span class="roi-label-text">当前单条获客成本</span>
+            <span class="roi-label-value" id="costValue">200 元</span>
+          </label>
+          <input type="range" class="roi-slider" id="costSlider" min="50" max="500" value="200" step="10" />
+          <div class="roi-range">
+            <span>50 元</span>
+            <span>500 元</span>
+          </div>
+        </div>
+
+        <!-- 每月线索数 -->
+        <div class="roi-input-group">
+          <label class="roi-label">
+            <span class="roi-label-text">每月获取线索数</span>
+            <span class="roi-label-value" id="leadsValue">100 条</span>
+          </label>
+          <input type="range" class="roi-slider" id="leadsSlider" min="10" max="500" value="100" step="10" />
+          <div class="roi-range">
+            <span>10 条</span>
+            <span>500 条</span>
+          </div>
+        </div>
+
+        <!-- 数据整理耗时 -->
+        <div class="roi-input-group">
+          <label class="roi-label">
+            <span class="roi-label-text">每天数据整理耗时</span>
+            <span class="roi-label-value" id="hoursValue">3 小时</span>
+          </label>
+          <input type="range" class="roi-slider" id="hoursSlider" min="0.5" max="8" value="3" step="0.5" />
+          <div class="roi-range">
+            <span>0.5 小时</span>
+            <span>8 小时</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="roi-results">
+        <div class="roi-result-header">AI 赋能后预计</div>
+
+        <div class="roi-result-item">
+          <span class="roi-result-label">每月获客成本节省</span>
+          <span class="roi-result-value roi-highlight" id="savingsValue">¥12,000</span>
+        </div>
+
+        <div class="roi-result-item">
+          <span class="roi-result-label">获客成本降幅</span>
+          <span class="roi-result-value" id="costReduction">60%</span>
+        </div>
+
+        <div class="roi-result-item">
+          <span class="roi-result-label">每月节省工时</span>
+          <span class="roi-result-value" id="hoursSaved">54 小时</span>
+        </div>
+
+        <div class="roi-result-item roi-total">
+          <span class="roi-result-label">年度综合节省</span>
+          <span class="roi-result-value roi-total-value" id="annualValue">¥189,000</span>
+        </div>
+
+        <div class="roi-note">
+          * 基于真实案例：MPE 智能床获客成本降 80%，数据整理时间降 90%
+        </div>
+
+        <a href="#contact" class="btn btn-primary roi-cta">获取我的 AI 落地方案</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .roi {
+    background: var(--bg);
+  }
+
+  .roi-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 48px;
+  }
+
+  .roi-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .roi-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .roi-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .roi-label-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .roi-label-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+
+  .roi-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .roi-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 2px 8px rgba(201, 165, 92, 0.3);
+    transition: transform 0.2s;
+  }
+
+  .roi-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  .roi-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 2px 8px rgba(201, 165, 92, 0.3);
+  }
+
+  .roi-range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .roi-results {
+    background: var(--bg-surface);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .roi-result-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .roi-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .roi-result-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .roi-result-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+  }
+
+  .roi-highlight {
+    color: #22c55e;
+    font-size: 22px;
+  }
+
+  .roi-total {
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .roi-total-value {
+    color: var(--accent);
+    font-size: 24px;
+  }
+
+  .roi-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .roi-cta {
+    text-align: center;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .roi-card {
+      grid-template-columns: 1fr;
+      padding: 28px 24px;
+      gap: 32px;
+    }
+
+    .roi-results {
+      padding: 24px;
+    }
+
+    .roi-result-value {
+      font-size: 16px;
+    }
+
+    .roi-highlight {
+      font-size: 20px;
+    }
+
+    .roi-total-value {
+      font-size: 22px;
+    }
+  }
+</style>
+
+<script>
+  const costSlider = document.getElementById('costSlider') as HTMLInputElement;
+  const leadsSlider = document.getElementById('leadsSlider') as HTMLInputElement;
+  const hoursSlider = document.getElementById('hoursSlider') as HTMLInputElement;
+
+  const costValue = document.getElementById('costValue')!;
+  const leadsValue = document.getElementById('leadsValue')!;
+  const hoursValue = document.getElementById('hoursValue')!;
+  const savingsValue = document.getElementById('savingsValue')!;
+  const costReduction = document.getElementById('costReduction')!;
+  const hoursSaved = document.getElementById('hoursSaved')!;
+  const annualValue = document.getElementById('annualValue')!;
+
+  function calculate() {
+    const cost = parseFloat(costSlider.value);
+    const leads = parseFloat(leadsSlider.value);
+    const hours = parseFloat(hoursSlider.value);
+
+    // Update labels
+    costValue.textContent = `${cost} 元`;
+    leadsValue.textContent = `${leads} 条`;
+    hoursValue.textContent = `${hours} 小时`;
+
+    // Calculate savings (based on 80% cost reduction and 90% time savings)
+    const costSavingsPerLead = cost * 0.8;
+    const monthlyCostSavings = costSavingsPerLead * leads;
+    const monthlyHoursSaved = hours * 0.9 * 30; // 30 days
+    const hourlyRate = 100; // estimated hourly rate
+    const monthlyTimeValue = monthlyHoursSaved * hourlyRate;
+    const monthlyTotal = monthlyCostSavings + monthlyTimeValue;
+    const annualTotal = monthlyTotal * 12;
+
+    // Update results
+    savingsValue.textContent = `¥${Math.round(monthlyCostSavings).toLocaleString()}`;
+    costReduction.textContent = '80%';
+    hoursSaved.textContent = `${Math.round(monthlyHoursSaved)} 小时`;
+    annualValue.textContent = `¥${Math.round(annualTotal).toLocaleString()}`;
+  }
+
+  costSlider?.addEventListener('input', calculate);
+  leadsSlider?.addEventListener('input', calculate);
+  hoursSlider?.addEventListener('input', calculate);
+
+  // Initial calculation
+  calculate();
+</script>
