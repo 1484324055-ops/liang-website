@@ -141,8 +141,12 @@ img {
   .nav-link,
   .mobile-nav-link,
   .faq-question,
-  .social-card {
+  .social-card,
+  .menu-toggle,
+  .footer-social a,
+  .back-to-top {
     min-height: 44px;
+    min-width: 44px;
   }
 }
 
