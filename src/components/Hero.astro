@@ -1,0 +1,548 @@
+---
+// Hero Section
+---
+
+<section class="hero" id="hero">
+  <!-- Background gradient -->
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <canvas class="hero-particles" id="heroParticles"></canvas>
+
+  <div class="container hero-content">
+    <!-- Avatar -->
+    <div class="hero-avatar reveal">
+      <img src="/images/avatar.jpg" alt="梁振杰" class="hero-avatar-img" />
+      <div class="hero-avatar-ring"></div>
+    </div>
+
+    <div class="hero-badge reveal">
+      <span class="hero-badge-dot"></span>
+      AI 落地顾问
+    </div>
+
+    <h1 class="hero-title reveal reveal-delay-1">
+      <span class="typewriter" id="heroTypewriter">帮传统企业</span><br />
+      <span class="hero-title-accent typewriter-accent visible" id="heroTypewriterAccent">用 AI 解决真问题</span>
+    </h1>
+
+    <p class="hero-desc reveal reveal-delay-2">
+      你可能已经试过 ChatGPT，但不知道怎么用到业务里。<br />
+      我帮 6 家企业完成了 AI 落地，最直接的效果：<br />
+      获客成本降 80%，数据整理时间省 90%。
+    </p>
+
+    <!-- Brand trust bar -->
+    <div class="hero-brands reveal reveal-delay-3">
+      <span class="hero-brands-label">曾服务</span>
+      <div class="hero-brands-list">
+        <span class="hero-brand" style="--brand-color: #003399">欧派家居</span>
+        <span class="hero-brand" style="--brand-color: #e85d26">爱汤米家居</span>
+        <span class="hero-brand" style="--brand-color: #2d8cf0">MPE 智能床</span>
+      </div>
+    </div>
+
+    <div class="hero-actions reveal reveal-delay-4">
+      <a href="#cases" class="btn btn-primary">
+        查看战绩
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#contact" class="btn btn-outline">联系咨询</a>
+    </div>
+
+    <!-- Key numbers -->
+    <div class="hero-stats reveal reveal-delay-5">
+      <div class="hero-stat">
+        <span class="hero-stat-number counter" data-target="80" data-suffix="%">80%</span>
+        <span class="hero-stat-label">获客成本降幅</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-number counter" data-target="500" data-suffix="万+" data-prefix="">500万+</span>
+        <span class="hero-stat-label">YouTube 播放量</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-number counter" data-target="7" data-suffix="">7</span>
+        <span class="hero-stat-label">权威认证</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-number counter" data-target="3" data-suffix="套">3套</span>
+        <span class="hero-stat-label">标准化方案</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(201, 165, 92, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 50%, rgba(201, 165, 92, 0.03), transparent);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 32px;
+  }
+
+  .hero-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+  }
+
+  .hero-avatar-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 165, 92, 0.3);
+    animation: ringPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--accent-subtle);
+    border: 1px solid rgba(201, 165, 92, 0.15);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 32px;
+    font-family: var(--font-mono);
+  }
+
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 7vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+
+  .hero-title-accent {
+    background: linear-gradient(135deg, var(--accent) 0%, #e8d5a3 50%, var(--accent) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .hero-desc {
+    font-size: clamp(16px, 2vw, 18px);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 560px;
+    margin-bottom: 40px;
+  }
+
+  .hero-brands {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .hero-brands-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+
+  .hero-brands-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hero-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    letter-spacing: 0.5px;
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .hero-brand:hover {
+    border-color: var(--brand-color, var(--accent));
+    color: var(--text-primary);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-stat-number {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .hero-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 48px;
+    overflow: hidden;
+  }
+
+  .hero-scroll-line {
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+
+  /* Particle canvas */
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Typewriter effect — JS driven */
+  .typewriter {
+    display: inline;
+    border-right: 3px solid transparent;
+  }
+
+  .typewriter.cursor {
+    border-right: 3px solid var(--accent);
+    animation: blink 0.8s step-end infinite;
+  }
+
+  .typewriter-accent {
+    display: inline;
+    border-right: 3px solid transparent;
+  }
+
+  /* JS-ready: hide accent until typed */
+  .js-ready .typewriter-accent {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .js-ready .typewriter-accent.visible {
+    opacity: 1;
+  }
+
+  .typewriter-accent.cursor {
+    border-right: 3px solid var(--accent);
+    animation: blink 0.8s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { border-color: var(--accent); }
+    50% { border-color: transparent; }
+  }
+
+  @keyframes scrollDown {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 100px 0 60px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      margin-bottom: 60px;
+    }
+
+    .hero-actions .btn {
+      justify-content: center;
+    }
+
+    .hero-stats {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .hero-stat-divider {
+      display: none;
+    }
+
+    .hero-stat {
+      min-width: calc(50% - 12px);
+    }
+
+    .hero-scroll {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Particle background — skip on mobile / reduced-motion for performance
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('heroParticles') as HTMLCanvasElement;
+  if (canvas && !isMobile && !prefersReducedMotion) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      let particles: Array<{x: number; y: number; vx: number; vy: number; size: number; opacity: number}> = [];
+      let animationId: number;
+      let mouseX = 0;
+      let mouseY = 0;
+
+      function resizeCanvas() {
+        const hero = canvas!.closest('.hero');
+        if (hero) {
+          canvas!.width = hero.clientWidth;
+          canvas!.height = hero.clientHeight;
+        }
+      }
+
+      function createParticles() {
+        particles = [];
+        const count = Math.min(50, Math.floor(canvas!.width * canvas!.height / 20000));
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * canvas!.width,
+            y: Math.random() * canvas!.height,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * 2 + 0.5,
+            opacity: Math.random() * 0.4 + 0.1,
+          });
+        }
+      }
+
+      function drawParticles() {
+        ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
+        particles.forEach((p) => {
+          // Mouse influence
+          const dx = mouseX - p.x;
+          const dy = mouseY - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            p.vx += dx * 0.00005;
+            p.vy += dy * 0.00005;
+          }
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Wrap around
+          if (p.x < 0) p.x = canvas!.width;
+          if (p.x > canvas!.width) p.x = 0;
+          if (p.y < 0) p.y = canvas!.height;
+          if (p.y > canvas!.height) p.y = 0;
+
+          ctx!.beginPath();
+          ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(201, 165, 92, ${p.opacity})`;
+          ctx!.fill();
+        });
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx!.beginPath();
+              ctx!.moveTo(particles[i].x, particles[i].y);
+              ctx!.lineTo(particles[j].x, particles[j].y);
+              ctx!.strokeStyle = `rgba(201, 165, 92, ${0.08 * (1 - dist / 120)})`;
+              ctx!.lineWidth = 0.5;
+              ctx!.stroke();
+            }
+          }
+        }
+
+        animationId = requestAnimationFrame(drawParticles);
+      }
+
+      // Track mouse
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+      });
+
+      // Init
+      resizeCanvas();
+      createParticles();
+
+      // Pause/resume animation based on visibility
+      let isRunning = false;
+      const heroObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !isRunning) {
+              isRunning = true;
+              drawParticles();
+            } else if (!entry.isIntersecting && isRunning) {
+              isRunning = false;
+              cancelAnimationFrame(animationId);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      heroObserver.observe(canvas.closest('.hero')!);
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        createParticles();
+      });
+    }
+  }
+
+  // Typewriter effect — JS driven
+  const typewriterEl = document.getElementById('heroTypewriter');
+  const typewriterAccentEl = document.getElementById('heroTypewriterAccent');
+
+  if (typewriterEl && typewriterAccentEl) {
+    const line1 = '帮传统企业';
+    const line2 = '用 AI 解决真问题';
+    let charIndex = 0;
+    const speed = 120; // ms per character
+
+    // Signal JS is ready, then clear fallback text
+    document.documentElement.classList.add('js-ready');
+    typewriterEl.textContent = '';
+    typewriterAccentEl.textContent = '';
+    typewriterAccentEl.classList.remove('visible');
+
+    // Show cursor on line 1
+    typewriterEl.classList.add('cursor');
+
+    function typeLine1() {
+      if (charIndex < line1.length) {
+        typewriterEl.textContent += line1[charIndex];
+        charIndex++;
+        setTimeout(typeLine1, speed);
+      } else {
+        // Line 1 done — move cursor to line 2
+        typewriterEl.classList.remove('cursor');
+        typewriterAccentEl.classList.add('visible', 'cursor');
+        let i = 0;
+        function typeChar() {
+          if (i < line2.length) {
+            typewriterAccentEl.textContent += line2[i];
+            i++;
+            setTimeout(typeChar, speed);
+          }
+          // Cursor stays on line 2 (class already added)
+        }
+        setTimeout(typeChar, 400);
+      }
+    }
+
+    // Start after page load + reveal delay
+    setTimeout(typeLine1, 800);
+  }
+</script>

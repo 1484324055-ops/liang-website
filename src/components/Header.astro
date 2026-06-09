@@ -1,0 +1,273 @@
+---
+// Header with sticky navigation
+---
+
+<!-- Skip Navigation -->
+<a href="#main-content" class="skip-link">跳转到主要内容</a>
+
+<header class="header" id="header">
+  <div class="header-inner container">
+    <a href="#hero" class="logo" aria-label="回到顶部">
+      <span class="logo-name">LIANG</span>
+      <span class="logo-divider">|</span>
+      <span class="logo-role">FDE</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="主导航">
+      <a href="#cases" class="nav-link">案例</a>
+      <a href="#certs" class="nav-link">认证</a>
+      <a href="#services" class="nav-link">服务</a>
+      <a href="#contact" class="nav-link">联系</a>
+    </nav>
+
+    <a href="#contact" class="btn btn-primary btn-sm">预约咨询</a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileNav">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<nav class="mobile-nav" id="mobileNav" aria-label="移动导航" aria-hidden="true" role="dialog" aria-modal="true">
+  <a href="#cases" class="mobile-nav-link">案例</a>
+  <a href="#certs" class="mobile-nav-link">认证</a>
+  <a href="#services" class="mobile-nav-link">服务</a>
+  <a href="#contact" class="mobile-nav-link">联系</a>
+  <a href="#contact" class="btn btn-primary mobile-nav-cta">预约咨询</a>
+</nav>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 0;
+    transition: all 0.4s var(--ease-out);
+    background: transparent;
+  }
+
+  .header.scrolled {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .logo:hover {
+    color: var(--text-primary);
+  }
+
+  .logo-divider {
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .logo-role {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s var(--ease-out);
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s var(--ease-out);
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .btn-sm {
+    padding: 10px 24px;
+    font-size: 13px;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s var(--ease-out);
+  }
+
+  .menu-toggle.active span:first-child {
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+
+  .menu-toggle.active span:last-child {
+    transform: rotate(-45deg) translate(3px, -3px);
+  }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .mobile-nav.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-link {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s var(--ease-out);
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--accent);
+  }
+
+  .mobile-nav-cta {
+    margin-top: 24px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Skip Navigation */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: var(--accent);
+    color: #0a0a0a;
+    padding: 12px 24px;
+    z-index: 1000;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.3s;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  @media (max-width: 768px) {
+    .nav, .header-inner .btn {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .mobile-nav {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  // Scroll effect (throttled to ~16ms / 60fps)
+  const header = document.getElementById('header');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 50) {
+          header?.classList.add('scrolled');
+        } else {
+          header?.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = mobileNav?.classList.toggle('open');
+    menuToggle.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? '关闭菜单' : '打开菜单');
+    mobileNav?.setAttribute('aria-hidden', String(!isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close mobile menu on any nav click (links + CTA button)
+  function closeMobileMenu() {
+    menuToggle?.classList.remove('active');
+    mobileNav?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.mobile-nav-link, .mobile-nav .btn').forEach((el) => {
+    el.addEventListener('click', closeMobileMenu);
+  });
+</script>

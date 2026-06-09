@@ -1,0 +1,165 @@
+---
+// Why Me Section — 3 Differentiators
+---
+
+<section class="section whyme" id="whyme">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">为什么选我</span>
+      <h2 class="section-title">懂业务、懂 AI、能落地</h2>
+      <p class="section-desc">
+        不是纯技术 geek，也不是只会卖课的博主。<br />
+        是真正从一线业务里长出来的 AI 落地执行者。
+      </p>
+    </div>
+
+    <div class="whyme-grid">
+      <!-- Card 1: 懂业务 -->
+      <div class="whyme-card card reveal reveal-delay-1">
+        <div class="icon-box whyme-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <h3 class="whyme-card-title">懂业务</h3>
+        <p class="whyme-card-desc">
+          4 年家居获客操盘，服务过欧派等品牌，管理过数百万级广告预算。从 3 人团队带到 40+ 人，年销 5000 万。我知道企业要的不是 AI 技术，是业绩增长。
+        </p>
+        <div class="whyme-card-data">
+          <div class="whyme-data-item">
+            <span class="whyme-data-value counter" data-target="5000" data-suffix="万">5000万</span>
+            <span class="whyme-data-label">年销售额</span>
+          </div>
+          <div class="whyme-data-item">
+            <span class="whyme-data-value counter" data-target="40" data-suffix="+人">40+人</span>
+            <span class="whyme-data-label">团队规模</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: 懂 AI -->
+      <div class="whyme-card card reveal reveal-delay-2">
+        <div class="icon-box whyme-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/>
+            <path d="M8 6a4 4 0 0 1 8 0"/>
+            <circle cx="12" cy="14" r="4"/>
+            <path d="M12 18v4"/>
+            <path d="M8 22h8"/>
+          </svg>
+        </div>
+        <h3 class="whyme-card-title">懂 AI</h3>
+        <p class="whyme-card-desc">
+          Google Gemini 认证 × 3、UNESCO OER 证书、阿里云 AI 训练师（高级）。30+ 工具深度实操，自建 OrbitOS 多 AI 协作知识管理系统。
+        </p>
+        <div class="whyme-card-data">
+          <div class="whyme-data-item">
+            <span class="whyme-data-value counter" data-target="7" data-suffix="项">7项</span>
+            <span class="whyme-data-label">权威认证</span>
+          </div>
+          <div class="whyme-data-item">
+            <span class="whyme-data-value counter" data-target="30" data-suffix="+">30+</span>
+            <span class="whyme-data-label">AI 工具实操</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: 能落地 -->
+      <div class="whyme-card card reveal reveal-delay-3">
+        <div class="icon-box whyme-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2v20M2 12h20"/>
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="whyme-card-title">能落地</h3>
+        <p class="whyme-card-desc">
+          3 套标准化 AI 交付方案已上线，微信小程序 0 编程独立完成并上线，YouTube Shorts 半个月 500 万+播放。说得出，做得到，拿得出结果。
+        </p>
+        <div class="whyme-card-data">
+          <div class="whyme-data-item">
+            <span class="whyme-data-value counter" data-target="3" data-suffix="套">3套</span>
+            <span class="whyme-data-label">交付方案</span>
+          </div>
+          <div class="whyme-data-item">
+            <span class="whyme-data-value counter" data-target="500" data-suffix="万+">500万+</span>
+            <span class="whyme-data-label">YouTube 播放</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .whyme {
+    background: var(--bg-surface);
+  }
+
+  .whyme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .whyme-card {
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .whyme-icon {
+    /* Base styles from .icon-box in global.css */
+  }
+
+  .whyme-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .whyme-card-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    flex: 1;
+  }
+
+  .whyme-card-data {
+    display: flex;
+    gap: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .whyme-data-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .whyme-data-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .whyme-data-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .whyme-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .whyme-card {
+      padding: 32px 24px;
+    }
+  }
+</style>

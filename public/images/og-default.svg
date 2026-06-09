@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#111111"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c9a55c"/>
+      <stop offset="100%" style="stop-color:#e8d5a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Grid pattern -->
+  <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Accent line -->
+  <rect x="80" y="260" width="60" height="3" fill="url(#accent)" rx="1.5"/>
+  <!-- Title -->
+  <text x="80" y="320" font-family="system-ui,-apple-system,sans-serif" font-size="56" font-weight="800" fill="#f0f0f0" letter-spacing="-1">帮传统企业</text>
+  <text x="80" y="390" font-family="system-ui,-apple-system,sans-serif" font-size="56" font-weight="800" fill="url(#accent)" letter-spacing="-1">用 AI 解决真问题</text>
+  <!-- Subtitle -->
+  <text x="80" y="445" font-family="system-ui,-apple-system,sans-serif" font-size="20" fill="#888888">LIANG · FDE 前沿部署工程师</text>
+  <!-- Bottom bar -->
+  <rect x="0" y="600" width="1200" height="30" fill="rgba(201,165,92,0.08)"/>
+  <text x="80" y="620" font-family="monospace" font-size="14" fill="#555555">liang.dev</text>
+</svg>

@@ -1,0 +1,171 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = 'LIANG — AI 落地顾问。帮传统企业用 AI 解决真问题，获客成本降 80%，数据整理省 90%。',
+  image = '/images/og-default.svg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://liang.dev');
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="zh_CN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <title>{title}</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "LIANG | FDE 前沿部署工程师",
+      "description": description,
+      "url": "https://liang.dev",
+      "image": "https://liang.dev/images/og-default.svg",
+      "jobTitle": "AI 落地顾问",
+      "knowsAbout": ["AI 落地部署", "知识管理系统", "自媒体 AI 工作流", "本地大模型部署"],
+      "sameAs": [
+        "https://xhslink.com/m/7htcBmaHvMh",
+        "https://v.douyin.com/n4Uw16gQ4J4/",
+        "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzNzExMg==#wechat_redirect",
+        "https://youtube.com/@zhenjie9267"
+      ]
+    })} />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts: Inter + Noto Sans SC -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Scroll Reveal Script -->
+    <script>
+      // Signal JS is ready (used by CSS to hide counters until animated)
+      document.documentElement.classList.add('js-ready');
+
+      // Intersection Observer for .reveal elements
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+      // Counter animation — per-element
+      function animateCounter(el: Element) {
+        if (el.classList.contains('counted')) return;
+        const target = parseFloat(el.getAttribute('data-target') || '0');
+        const suffix = el.getAttribute('data-suffix') || '';
+        const prefix = el.getAttribute('data-prefix') || '';
+        const decimals = el.getAttribute('data-decimals') || '0';
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now: number) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          const current = target * eased;
+          el.textContent = prefix + (decimals === '1' ? current.toFixed(1) : Math.floor(current).toLocaleString()) + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            el.classList.add('counted');
+          }
+        }
+        requestAnimationFrame(update);
+      }
+
+      // Observe counters individually
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      document.querySelectorAll('.counter').forEach((el) => counterObserver.observe(el));
+
+      // Parallax effect on Hero section
+      const heroBg = document.querySelector('.hero-bg');
+      const heroGrid = document.querySelector('.hero-grid');
+      const heroContent = document.querySelector('.hero-content');
+      const heroEl = document.querySelector('.hero');
+      let heroHeight = heroEl?.clientHeight || 800;
+      let parallaxTicking = false;
+
+      // Update cached height on resize
+      window.addEventListener('resize', () => {
+        heroHeight = heroEl?.clientHeight || 800;
+      });
+
+      if (heroBg && heroGrid) {
+        window.addEventListener('scroll', () => {
+          if (!parallaxTicking) {
+            requestAnimationFrame(() => {
+              const scrollY = window.scrollY;
+              if (scrollY < heroHeight) {
+                const ratio = scrollY / heroHeight;
+                (heroBg as HTMLElement).style.transform = `translateY(${scrollY * 0.3}px)`;
+                (heroGrid as HTMLElement).style.transform = `translateY(${scrollY * 0.15}px)`;
+                if (heroContent) {
+                  (heroContent as HTMLElement).style.transform = `translateY(${scrollY * 0.08}px)`;
+                  (heroContent as HTMLElement).style.opacity = `${1 - ratio * 0.6}`;
+                }
+              }
+              parallaxTicking = false;
+            });
+            parallaxTicking = true;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
