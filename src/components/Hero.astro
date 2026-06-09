@@ -326,7 +326,12 @@ import avatar from '../assets/images/avatar.jpg';
     border-right: 3px solid transparent;
   }
 
-  /* JS-ready: hide accent until typed */
+  /* JS-ready: hide both lines until typed */
+  .js-ready .typewriter {
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
   .js-ready .typewriter-accent {
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -543,18 +548,19 @@ import avatar from '../assets/images/avatar.jpg';
     }
   }
 
-  // Typewriter effect — JS driven
+  // Typewriter effect — JS driven (skip if reduced motion)
   const typewriterEl = document.getElementById('heroTypewriter');
   const typewriterAccentEl = document.getElementById('heroTypewriterAccent');
 
-  if (typewriterEl && typewriterAccentEl) {
+  if (typewriterEl && typewriterAccentEl && !prefersReducedMotion) {
     const line1 = '帮传统企业';
     const line2 = '用 AI 解决真问题';
     let charIndex = 0;
     const speed = 120; // ms per character
 
-    // Clear fallback text (js-ready already set by Layout script)
+    // Clear fallback text and show element (js-ready already set by Layout script)
     typewriterEl.textContent = '';
+    typewriterEl.style.opacity = '1';
     typewriterAccentEl.textContent = '';
     typewriterAccentEl.classList.remove('visible');
 

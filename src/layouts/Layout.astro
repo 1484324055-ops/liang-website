@@ -29,9 +29,12 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LIANG | AI 落地顾问" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content="zh_CN" />
 
@@ -135,7 +138,8 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
 
       document.querySelectorAll('.counter').forEach((el) => counterObserver.observe(el));
 
-      // Parallax effect on Hero section
+      // Parallax effect on Hero section (skip if reduced motion)
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const heroBg = document.querySelector('.hero-bg');
       const heroGrid = document.querySelector('.hero-grid');
       const heroContent = document.querySelector('.hero-content');
@@ -148,7 +152,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
         heroHeight = heroEl?.clientHeight || 800;
       });
 
-      if (heroBg && heroGrid) {
+      if (heroBg && heroGrid && !prefersReducedMotion) {
         window.addEventListener('scroll', () => {
           if (!parallaxTicking) {
             requestAnimationFrame(() => {

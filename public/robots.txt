@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://liangzhenjie.cn/sitemap-index.xml

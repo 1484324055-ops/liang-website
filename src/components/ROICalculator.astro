@@ -17,7 +17,7 @@
       <div class="roi-inputs">
         <!-- 当前获客成本 -->
         <div class="roi-input-group">
-          <label class="roi-label">
+          <label class="roi-label" for="costSlider">
             <span class="roi-label-text">当前单条获客成本</span>
             <span class="roi-label-value" id="costValue">200 元</span>
           </label>
@@ -30,7 +30,7 @@
 
         <!-- 每月线索数 -->
         <div class="roi-input-group">
-          <label class="roi-label">
+          <label class="roi-label" for="leadsSlider">
             <span class="roi-label-text">每月获取线索数</span>
             <span class="roi-label-value" id="leadsValue">100 条</span>
           </label>
@@ -43,7 +43,7 @@
 
         <!-- 数据整理耗时 -->
         <div class="roi-input-group">
-          <label class="roi-label">
+          <label class="roi-label" for="hoursSlider">
             <span class="roi-label-text">每天数据整理耗时</span>
             <span class="roi-label-value" id="hoursValue">3 小时</span>
           </label>
@@ -60,22 +60,22 @@
 
         <div class="roi-result-item">
           <span class="roi-result-label">每月获客成本节省</span>
-          <span class="roi-result-value roi-highlight" id="savingsValue">¥12,000</span>
+          <span class="roi-result-value roi-highlight" id="savingsValue" aria-live="polite">¥6,000</span>
         </div>
 
         <div class="roi-result-item">
           <span class="roi-result-label">获客成本降幅</span>
-          <span class="roi-result-value" id="costReduction">60%</span>
+          <span class="roi-result-value" id="costReduction" aria-live="polite">30%</span>
         </div>
 
         <div class="roi-result-item">
           <span class="roi-result-label">每月节省工时</span>
-          <span class="roi-result-value" id="hoursSaved">54 小时</span>
+          <span class="roi-result-value" id="hoursSaved" aria-live="polite">33 小时</span>
         </div>
 
         <div class="roi-result-item roi-total">
           <span class="roi-result-label">年度综合节省</span>
-          <span class="roi-result-value roi-total-value" id="annualValue">¥189,000</span>
+          <span class="roi-result-value roi-total-value" id="annualValue" aria-live="polite">¥91,800</span>
         </div>
 
         <div class="roi-note">
