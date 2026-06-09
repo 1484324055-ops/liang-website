@@ -195,12 +195,8 @@
       answer?.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
     });
 
-    // Keyboard support
+    // Keyboard support — Escape to close
     btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        btn.click();
-      }
       if (e.key === 'Escape') {
         const item = btn.closest('.faq-item');
         if (item?.classList.contains('open')) {

@@ -79,7 +79,7 @@
         </div>
 
         <div class="roi-note">
-          * 基于真实案例：MPE 智能床获客成本降 80%，数据整理时间降 90%
+          * 保守估计：获客成本降 30%，数据整理时间省 50%，时薪按 50 元计算
         </div>
 
         <a href="#contact" class="btn btn-primary roi-cta">获取我的 AI 落地方案</a>
@@ -286,18 +286,18 @@
     leadsValue.textContent = `${leads} 条`;
     hoursValue.textContent = `${hours} 小时`;
 
-    // Calculate savings (based on 80% cost reduction and 90% time savings)
-    const costSavingsPerLead = cost * 0.8;
+    // Conservative estimate: 30% cost reduction, 50% time savings
+    const costSavingsPerLead = cost * 0.3;
     const monthlyCostSavings = costSavingsPerLead * leads;
-    const monthlyHoursSaved = hours * 0.9 * 30; // 30 days
-    const hourlyRate = 100; // estimated hourly rate
+    const monthlyHoursSaved = hours * 0.5 * 22; // 22 working days
+    const hourlyRate = 50; // conservative hourly rate
     const monthlyTimeValue = monthlyHoursSaved * hourlyRate;
     const monthlyTotal = monthlyCostSavings + monthlyTimeValue;
     const annualTotal = monthlyTotal * 12;
 
     // Update results
     savingsValue.textContent = `¥${Math.round(monthlyCostSavings).toLocaleString()}`;
-    costReduction.textContent = '80%';
+    costReduction.textContent = '30%';
     hoursSaved.textContent = `${Math.round(monthlyHoursSaved)} 小时`;
     annualValue.textContent = `¥${Math.round(annualTotal).toLocaleString()}`;
   }

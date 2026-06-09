@@ -263,11 +263,22 @@
   // Close mobile menu on any nav click (links + CTA button)
   function closeMobileMenu() {
     menuToggle?.classList.remove('active');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    menuToggle?.setAttribute('aria-label', '打开菜单');
     mobileNav?.classList.remove('open');
+    mobileNav?.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
   document.querySelectorAll('.mobile-nav-link, .mobile-nav .btn').forEach((el) => {
     el.addEventListener('click', closeMobileMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav?.classList.contains('open')) {
+      closeMobileMenu();
+      menuToggle?.focus();
+    }
   });
 </script>

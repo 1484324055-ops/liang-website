@@ -1,5 +1,13 @@
 ---
 // Certificates Section — Trust signals with actual certificate images
+import { Image } from 'astro:assets';
+import certGeminiEducator from '../assets/certs/Gemini教育者认证.png';
+import certGeminiTeacher from '../assets/certs/Gemini教师认证.png';
+import certGeminiStudent from '../assets/certs/Gemini Certified University Student认证.png';
+import certUNESCO from '../assets/certs/联合国科教文组织OER证书.png';
+import certAITrainer from '../assets/certs/ai-trainer.jpg';
+import certAIJustice from '../assets/certs/人工智能、司法与法治认证.png';
+import certLiveMarketing from '../assets/certs/live-marketing.jpg';
 ---
 
 <section class="section certs" id="certs">
@@ -16,11 +24,11 @@
       <!-- Google Gemini Educator -->
       <div class="cert-card card reveal">
         <div class="cert-img-wrap">
-          <img src="/certs/Gemini教育者认证.png" alt="Gemini 教育者认证" class="cert-img" loading="eager" fetchpriority="high" />
+          <Image src={certGeminiEducator} alt="Gemini 教育者认证" class="cert-img" loading="eager" fetchpriority="high" width={400} height={300} />
         </div>
         <div class="cert-org">Google for Education</div>
         <h3 class="cert-name">Gemini 教育者认证</h3>
-        <p class="cert-name-en">Gemini Educator Certification</p>
+        <p class="cert-name-en" lang="en">Gemini Educator Certification</p>
         <div class="cert-meta">
           <span class="cert-date">2026.06.05</span>
           <span class="cert-valid">谷歌教育部门颁发 · 有效至 2029.06.05</span>
@@ -30,11 +38,11 @@
       <!-- Google Gemini Teacher -->
       <div class="cert-card card reveal reveal-delay-1">
         <div class="cert-img-wrap">
-          <img src="/certs/Gemini教师认证.png" alt="Gemini 教师认证" class="cert-img" loading="eager" fetchpriority="high" />
+          <Image src={certGeminiTeacher} alt="Gemini 教师认证" class="cert-img" loading="eager" fetchpriority="high" width={400} height={300} />
         </div>
         <div class="cert-org">Google for Education</div>
         <h3 class="cert-name">Gemini 教师认证</h3>
-        <p class="cert-name-en">Gemini Certified Teacher</p>
+        <p class="cert-name-en" lang="en">Gemini Certified Teacher</p>
         <div class="cert-meta">
           <span class="cert-date">2026.05.21</span>
           <span class="cert-valid">谷歌教育部门颁发 · 有效至 2029.05.21</span>
@@ -44,11 +52,11 @@
       <!-- Google Gemini University Student -->
       <div class="cert-card card reveal reveal-delay-2">
         <div class="cert-img-wrap">
-          <img src="/certs/Gemini Certified University Student认证.png" alt="Gemini 大学生认证" class="cert-img" loading="eager" fetchpriority="high" />
+          <Image src={certGeminiStudent} alt="Gemini 大学生认证" class="cert-img" loading="eager" fetchpriority="high" width={400} height={300} />
         </div>
         <div class="cert-org">Google for Education</div>
         <h3 class="cert-name">Gemini 大学生认证</h3>
-        <p class="cert-name-en">Gemini Certified University Student</p>
+        <p class="cert-name-en" lang="en">Gemini Certified University Student</p>
         <div class="cert-meta">
           <span class="cert-date">2026.05.21</span>
           <span class="cert-valid">谷歌教育部门颁发 · 有效至 2029.05.21</span>
@@ -58,11 +66,11 @@
       <!-- UNESCO OER -->
       <div class="cert-card card reveal reveal-delay-1">
         <div class="cert-img-wrap">
-          <img src="/certs/联合国科教文组织OER证书.png" alt="UNESCO OER 证书" class="cert-img" loading="lazy" />
+          <Image src={certUNESCO} alt="UNESCO OER 证书" class="cert-img" loading="lazy" width={400} height={300} />
         </div>
         <div class="cert-org">联合国教科文组织</div>
         <h3 class="cert-name">开放教育资源开发证书</h3>
-        <p class="cert-name-en">Open Educational Resources (OER) Development</p>
+        <p class="cert-name-en" lang="en">Open Educational Resources (OER) Development</p>
         <div class="cert-meta">
           <span class="cert-date">2026.05.21</span>
           <span class="cert-valid">UNESCO 颁发 · Prof. Lidia Arthur Brito 签署</span>
@@ -72,11 +80,11 @@
       <!-- Alibaba AI Trainer -->
       <div class="cert-card card reveal reveal-delay-2">
         <div class="cert-img-wrap">
-          <img src="/certs/ai-trainer.jpg" alt="人工智能训练师高级" class="cert-img" loading="lazy" />
+          <Image src={certAITrainer} alt="人工智能训练师高级" class="cert-img" loading="lazy" width={400} height={300} />
         </div>
         <div class="cert-org">阿里云 · 达摩院</div>
         <h3 class="cert-name">人工智能训练师（高级）</h3>
-        <p class="cert-name-en">AI Trainer — Advanced Level</p>
+        <p class="cert-name-en" lang="en">AI Trainer — Advanced Level</p>
         <div class="cert-meta">
           <span class="cert-date">2026.05.21</span>
           <span class="cert-valid">有效至 2027.05.21</span>
@@ -86,11 +94,11 @@
       <!-- AI & Justice -->
       <div class="cert-card card reveal reveal-delay-3">
         <div class="cert-img-wrap">
-          <img src="/certs/人工智能、司法与法治认证.png" alt="人工智能、司法与法治认证" class="cert-img" loading="lazy" />
+          <Image src={certAIJustice} alt="人工智能、司法与法治认证" class="cert-img" loading="lazy" width={400} height={300} />
         </div>
         <div class="cert-org">牛津大学 · UNESCO</div>
         <h3 class="cert-name">人工智能、司法与法治认证</h3>
-        <p class="cert-name-en">AI, Justice & Rule of Law</p>
+        <p class="cert-name-en" lang="en">AI, Justice & Rule of Law</p>
         <div class="cert-meta">
           <span class="cert-date">2026.05.31</span>
           <span class="cert-valid">牛津大学赛德商学院与联合国教科文组织共同开发</span>
@@ -100,11 +108,11 @@
       <!-- 直播运营营销师 -->
       <div class="cert-card card reveal reveal-delay-1">
         <div class="cert-img-wrap">
-          <img src="/certs/live-marketing.jpg" alt="直播运营营销师" class="cert-img" loading="lazy" />
+          <Image src={certLiveMarketing} alt="直播运营营销师" class="cert-img" loading="lazy" width={400} height={300} />
         </div>
         <div class="cert-org">行业认证</div>
         <h3 class="cert-name">直播运营营销师</h3>
-        <p class="cert-name-en">Live Streaming Marketing Professional</p>
+        <p class="cert-name-en" lang="en">Live Streaming Marketing Professional</p>
         <div class="cert-meta">
           <span class="cert-date">已取得</span>
           <span class="cert-valid">直播电商专业能力认证</span>

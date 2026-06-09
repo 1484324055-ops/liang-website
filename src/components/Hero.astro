@@ -1,5 +1,7 @@
 ---
 // Hero Section
+import { Image } from 'astro:assets';
+import avatar from '../assets/images/avatar.jpg';
 ---
 
 <section class="hero" id="hero">
@@ -11,7 +13,7 @@
   <div class="container hero-content">
     <!-- Avatar -->
     <div class="hero-avatar reveal">
-      <img src="/images/avatar.jpg" alt="梁振杰" class="hero-avatar-img" />
+      <Image src={avatar} alt="梁振杰" class="hero-avatar-img" width={120} height={120} loading="eager" />
       <div class="hero-avatar-ring"></div>
     </div>
 
@@ -551,8 +553,7 @@
     let charIndex = 0;
     const speed = 120; // ms per character
 
-    // Signal JS is ready, then clear fallback text
-    document.documentElement.classList.add('js-ready');
+    // Clear fallback text (js-ready already set by Layout script)
     typewriterEl.textContent = '';
     typewriterAccentEl.textContent = '';
     typewriterAccentEl.classList.remove('visible');

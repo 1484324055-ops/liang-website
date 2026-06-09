@@ -7,13 +7,14 @@ interface Props {
   image?: string;
 }
 
+const siteURL = (Astro.site?.toString() || 'https://liangzhenjie.cn').replace(/\/$/, '');
 const {
   title,
   description = 'LIANG — AI 落地顾问。帮传统企业用 AI 解决真问题，获客成本降 80%，数据整理省 90%。',
-  image = '/images/og-default.svg'
+  image = `${siteURL}/images/og-default.png`
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://liang.dev');
+const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
 ---
 
 <!doctype html>
@@ -22,6 +23,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://liang.de
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
@@ -44,10 +47,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://liang.de
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      "name": "LIANG | FDE 前沿部署工程师",
+      "name": "LIANG | AI 落地顾问",
       "description": description,
-      "url": "https://liang.dev",
-      "image": "https://liang.dev/images/og-default.svg",
+      "url": siteURL,
+      "image": `${siteURL}/images/og-default.png`,
       "jobTitle": "AI 落地顾问",
       "knowsAbout": ["AI 落地部署", "知识管理系统", "自媒体 AI 工作流", "本地大模型部署"],
       "sameAs": [
@@ -58,11 +61,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://liang.de
       ]
     })} />
 
-    <!-- Preconnect -->
+    <!-- Fonts: Inter + Noto Sans SC + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Fonts: Inter + Noto Sans SC -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400&display=swap"
       rel="stylesheet"
@@ -70,6 +71,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://liang.de
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
   </head>
   <body>
     <slot />

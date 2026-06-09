@@ -1,5 +1,7 @@
 ---
 // Contact Section — Social Matrix + CTA
+import { Image } from 'astro:assets';
+import wechatQR from '../assets/images/wechat-qr.jpg';
 ---
 
 <section class="section contact" id="contact">
@@ -14,7 +16,7 @@
           还是已经有明确的 AI 落地需求，都欢迎来聊。
         </p>
         <div class="contact-qr">
-          <img src="/images/wechat-qr.jpg" alt="微信二维码 - 扫码添加阿杰" class="contact-qr-img" />
+          <Image src={wechatQR} alt="微信二维码 - 扫码添加阿杰" class="contact-qr-img" width={280} loading="lazy" />
           <span class="contact-qr-hint">扫码添加微信 · 请备注「来自网站」</span>
         </div>
       </div>
