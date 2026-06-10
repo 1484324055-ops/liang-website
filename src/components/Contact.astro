@@ -11,7 +11,7 @@ import wechatQR from '../assets/images/wechat-qr.png';
       <div class="contact-cta reveal">
         <span class="section-label">联系我</span>
         <h2 class="section-title">让我们一起，<br />用 AI 解决真问题</h2>
-        <p class="section-desc" style="max-width: 520px;">
+        <p class="section-desc contact-desc">
           无论你是想了解 AI 如何赋能你的业务，<br />
           还是已经有明确的 AI 落地需求，都欢迎来聊。
         </p>
@@ -116,8 +116,12 @@ import wechatQR from '../assets/images/wechat-qr.png';
     text-align: left;
   }
 
+  .contact-desc {
+    max-width: 520px;
+  }
+
   .contact-cta .contact-qr-hint {
-    text-align: left;
+    text-align: center;
   }
 
   .contact-cta .section-desc {
@@ -129,8 +133,9 @@ import wechatQR from '../assets/images/wechat-qr.png';
     display: flex;
     flex-direction: column;
     gap: 12px;
-    align-items: flex-start;
-    width: 280px;
+    align-items: center;
+    max-width: 280px;
+    width: 100%;
   }
 
   .contact-qr-img {
@@ -281,7 +286,8 @@ import wechatQR from '../assets/images/wechat-qr.png';
     }
 
     .contact-qr {
-      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .contact-qr-img {

@@ -341,6 +341,13 @@ import avatar from '../assets/images/avatar.jpg';
     opacity: 1;
   }
 
+  /* Reduced motion: show both lines immediately */
+  @media (prefers-reduced-motion: reduce) {
+    .js-ready .typewriter {
+      opacity: 1;
+    }
+  }
+
   .typewriter-accent.cursor {
     border-right: 3px solid var(--accent);
     animation: blink 0.8s step-end infinite;

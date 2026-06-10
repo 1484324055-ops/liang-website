@@ -31,11 +31,11 @@
 
 <!-- Mobile Nav Overlay -->
 <nav class="mobile-nav" id="mobileNav" aria-label="移动导航" aria-hidden="true" role="dialog" aria-modal="true">
-  <a href="#cases" class="mobile-nav-link">案例</a>
-  <a href="#certs" class="mobile-nav-link">认证</a>
-  <a href="#services" class="mobile-nav-link">服务</a>
-  <a href="#contact" class="mobile-nav-link">联系</a>
-  <a href="#contact" class="btn btn-primary mobile-nav-cta">预约咨询</a>
+  <a href="#cases" class="mobile-nav-link" tabindex="-1">案例</a>
+  <a href="#certs" class="mobile-nav-link" tabindex="-1">认证</a>
+  <a href="#services" class="mobile-nav-link" tabindex="-1">服务</a>
+  <a href="#contact" class="mobile-nav-link" tabindex="-1">联系</a>
+  <a href="#contact" class="btn btn-primary mobile-nav-cta" tabindex="-1">预约咨询</a>
 </nav>
 
 <style>
@@ -251,6 +251,8 @@
   const menuToggle = document.getElementById('menuToggle');
   const mobileNav = document.getElementById('mobileNav');
 
+  let focusTrapHandler: ((e: KeyboardEvent) => void) | null = null;
+
   menuToggle?.addEventListener('click', () => {
     const isOpen = mobileNav?.classList.toggle('open');
     menuToggle.classList.toggle('active');
@@ -258,6 +260,35 @@
     menuToggle.setAttribute('aria-label', isOpen ? '关闭菜单' : '打开菜单');
     mobileNav?.setAttribute('aria-hidden', String(!isOpen));
     document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    // Toggle tabindex on mobile nav links
+    mobileNav?.querySelectorAll<HTMLElement>('a, button').forEach((el) => {
+      el.setAttribute('tabindex', isOpen ? '0' : '-1');
+    });
+
+    // Focus trap
+    if (isOpen && mobileNav) {
+      const focusableEls = mobileNav.querySelectorAll<HTMLElement>('a, button');
+      const firstEl = focusableEls[0];
+      const lastEl = focusableEls[focusableEls.length - 1];
+
+      focusTrapHandler = (e: KeyboardEvent) => {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey && document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl?.focus();
+        } else if (!e.shiftKey && document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl?.focus();
+        }
+      };
+
+      mobileNav.addEventListener('keydown', focusTrapHandler);
+      firstEl?.focus();
+    } else if (focusTrapHandler && mobileNav) {
+      mobileNav.removeEventListener('keydown', focusTrapHandler);
+      focusTrapHandler = null;
+    }
   });
 
   // Close mobile menu on any nav click (links + CTA button)
@@ -268,6 +299,10 @@
     mobileNav?.classList.remove('open');
     mobileNav?.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (focusTrapHandler && mobileNav) {
+      mobileNav.removeEventListener('keydown', focusTrapHandler);
+      focusTrapHandler = null;
+    }
   }
 
   document.querySelectorAll('.mobile-nav-link, .mobile-nav .btn').forEach((el) => {

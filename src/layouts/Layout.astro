@@ -93,14 +93,19 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
       );
 
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-      // Counter animation — per-element
+      // Counter animation — per-element (skip if reduced motion)
+      const counterPrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function animateCounter(el: Element) {
         if (el.classList.contains('counted')) return;
+        if (counterPrefersReducedMotion) {
+          el.classList.add('counted');
+          return;
+        }
         const target = parseFloat(el.getAttribute('data-target') || '0');
         const suffix = el.getAttribute('data-suffix') || '';
         const prefix = el.getAttribute('data-prefix') || '';
@@ -133,7 +138,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
             }
           });
         },
-        { threshold: 0.3 }
+        { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
       );
 
       document.querySelectorAll('.counter').forEach((el) => counterObserver.observe(el));
