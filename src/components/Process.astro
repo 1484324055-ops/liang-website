@@ -2,7 +2,7 @@
 // Process Section — Service workflow timeline
 ---
 
-<section class="section process" id="process">
+<section class="section process" id="process" data-story-section="process">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label">合作流程</span>
@@ -14,7 +14,7 @@
 
     <div class="process-timeline">
       <!-- Step 1 -->
-      <div class="process-step reveal">
+      <div class="process-step reveal" data-process-step="0">
         <div class="process-number">01</div>
         <div class="process-connector"></div>
         <div class="process-card card">
@@ -35,7 +35,7 @@
       </div>
 
       <!-- Step 2 -->
-      <div class="process-step reveal reveal-delay-1">
+      <div class="process-step reveal reveal-delay-1" data-process-step="1">
         <div class="process-number">02</div>
         <div class="process-connector"></div>
         <div class="process-card card">
@@ -60,7 +60,7 @@
       </div>
 
       <!-- Step 3 -->
-      <div class="process-step reveal reveal-delay-2">
+      <div class="process-step reveal reveal-delay-2" data-process-step="2">
         <div class="process-number">03</div>
         <div class="process-connector"></div>
         <div class="process-card card">
@@ -83,7 +83,7 @@
       </div>
 
       <!-- Step 4 -->
-      <div class="process-step reveal reveal-delay-3">
+      <div class="process-step reveal reveal-delay-3" data-process-step="3">
         <div class="process-number">04</div>
         <div class="process-connector"></div>
         <div class="process-card card">
@@ -109,6 +109,7 @@
 
 <style>
   .process-timeline {
+    --process-progress: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
@@ -129,6 +130,7 @@
     font-family: var(--font-mono);
     margin-bottom: 16px;
     opacity: 0.4;
+    transition: opacity 0.35s ease, text-shadow 0.35s ease, transform 0.35s var(--ease-out);
   }
 
   .process-connector {
@@ -145,6 +147,38 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    border-color: rgba(201, 165, 92, 0.08);
+    transform: translateY(12px);
+    transition:
+      transform 0.48s var(--ease-out),
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
+      background 0.35s ease;
+  }
+
+  .process-step.story-complete .process-number,
+  .process-step.story-current .process-number {
+    opacity: 1;
+  }
+
+  .process-step.story-current .process-number {
+    transform: translateY(-3px);
+    text-shadow: 0 0 22px rgba(201, 165, 92, 0.42);
+  }
+
+  .process-step.story-complete .process-card,
+  .process-step.story-current .process-card {
+    transform: translateY(0);
+    border-color: rgba(201, 165, 92, 0.28);
+  }
+
+  .process-step.story-current .process-card {
+    background:
+      linear-gradient(145deg, rgba(201, 165, 92, 0.06), transparent 45%),
+      var(--bg-card);
+    box-shadow:
+      0 22px 64px rgba(0, 0, 0, 0.34),
+      0 0 28px rgba(201, 165, 92, 0.07);
   }
 
   .process-icon {
@@ -199,12 +233,30 @@
     z-index: 0;
   }
 
+  .process-timeline::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 38px;
+    left: 12.5%;
+    width: calc(75% * var(--process-progress));
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201, 165, 92, 0.28), var(--accent), #ead38d);
+    box-shadow: 0 0 14px rgba(201, 165, 92, 0.34);
+    transition: width 0.12s linear;
+    pointer-events: none;
+  }
+
   @media (max-width: 1024px) {
     .process-timeline {
       grid-template-columns: repeat(2, 1fr);
     }
 
     .process-timeline::before {
+      display: none;
+    }
+
+    .process-timeline::after {
       display: none;
     }
   }
@@ -214,6 +266,28 @@
       grid-template-columns: 1fr;
       max-width: 480px;
       margin: 0 auto;
+      padding-left: 22px;
+    }
+
+    .process-timeline::before,
+    .process-timeline::after {
+      display: block;
+      top: 0;
+      bottom: 0;
+      left: 9px;
+      width: 1px;
+      height: 100%;
+      transform-origin: top;
+    }
+
+    .process-timeline::before {
+      background: linear-gradient(180deg, transparent, var(--border-light) 8%, var(--border-light) 92%, transparent);
+    }
+
+    .process-timeline::after {
+      background: linear-gradient(180deg, rgba(201, 165, 92, 0.24), var(--accent), #ead38d);
+      transform: scaleY(var(--process-progress));
+      transition: transform 0.12s linear;
     }
 
     .process-step {
@@ -263,4 +337,37 @@
       justify-content: center;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .process-card,
+    .process-step.story-complete .process-card,
+    .process-step.story-current .process-card {
+      transform: none;
+    }
+  }
 </style>
+
+<script>
+  const processSection = document.querySelector<HTMLElement>('[data-story-section="process"]');
+
+  if (processSection && !processSection.dataset.storyBound) {
+    processSection.dataset.storyBound = 'true';
+    const timeline = processSection.querySelector<HTMLElement>('.process-timeline');
+    const steps = Array.from(processSection.querySelectorAll<HTMLElement>('[data-process-step]'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('visual-story:update', (event) => {
+      const detail = (event as CustomEvent<{ section: string; progress: number }>).detail;
+      if (detail.section !== 'process' || !timeline) return;
+
+      const progress = reducedMotion ? 1 : Math.min(1, Math.max(0, detail.progress));
+      timeline.style.setProperty('--process-progress', progress.toFixed(4));
+      const currentIndex = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+
+      steps.forEach((step, index) => {
+        step.classList.toggle('story-complete', reducedMotion || index < currentIndex);
+        step.classList.toggle('story-current', !reducedMotion && index === currentIndex);
+      });
+    });
+  }
+</script>

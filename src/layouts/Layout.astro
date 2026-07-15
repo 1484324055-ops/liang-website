@@ -64,14 +64,6 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
       ]
     })} />
 
-    <!-- Fonts: Inter + Noto Sans SC + JetBrains Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono:wght@400&display=swap"
-      rel="stylesheet"
-    />
-
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -143,40 +135,6 @@ const canonicalURL = new URL(Astro.url.pathname, siteURL).toString();
 
       document.querySelectorAll('.counter').forEach((el) => counterObserver.observe(el));
 
-      // Parallax effect on Hero section (skip if reduced motion)
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const heroBg = document.querySelector('.hero-bg');
-      const heroGrid = document.querySelector('.hero-grid');
-      const heroContent = document.querySelector('.hero-content');
-      const heroEl = document.querySelector('.hero');
-      let heroHeight = heroEl?.clientHeight || 800;
-      let parallaxTicking = false;
-
-      // Update cached height on resize
-      window.addEventListener('resize', () => {
-        heroHeight = heroEl?.clientHeight || 800;
-      });
-
-      if (heroBg && heroGrid && !prefersReducedMotion) {
-        window.addEventListener('scroll', () => {
-          if (!parallaxTicking) {
-            requestAnimationFrame(() => {
-              const scrollY = window.scrollY;
-              if (scrollY < heroHeight) {
-                const ratio = scrollY / heroHeight;
-                (heroBg as HTMLElement).style.transform = `translateY(${scrollY * 0.3}px)`;
-                (heroGrid as HTMLElement).style.transform = `translateY(${scrollY * 0.15}px)`;
-                if (heroContent) {
-                  (heroContent as HTMLElement).style.transform = `translateY(${scrollY * 0.08}px)`;
-                  (heroContent as HTMLElement).style.opacity = `${1 - ratio * 0.6}`;
-                }
-              }
-              parallaxTicking = false;
-            });
-            parallaxTicking = true;
-          }
-        });
-      }
     </script>
   </body>
 </html>

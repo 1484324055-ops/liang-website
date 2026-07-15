@@ -1,65 +1,51 @@
-# 微信二维码图片放置说明
+# 微信二维码维护说明
 
 ## 当前状态
-网站中已配置微信二维码显示位置，但需要您手动放置图片文件。
 
-## 放置步骤
+微信二维码已经配置并正常显示，不需要额外放置占位图片。
 
-### 1. 保存二维码图片
-将您发送的微信二维码图片保存到以下位置：
-```
-f:\Obsidian\lzj-notes\20_项目\个人网站\public\images\wechat-qr.jpg
-```
+源文件位置：
 
-### 2. 图片要求
-- **文件名**: `wechat-qr.jpg`（必须严格匹配）
-- **格式**: JPG 或 JPEG
-- **建议尺寸**: 400x400 像素（正方形）
-- **文件大小**: 建议小于 200KB
-
-### 3. 验证图片
-放置图片后，可以通过以下命令检查：
-```bash
-# 检查图片是否存在
-ls -lh d:/Obsidian/lzj-notes/website/public/images/wechat-qr.jpg
-
-# 检查图片大小
-python -c "import os; print(f'{os.path.getsize(\"d:/Obsidian/lzj-notes/website/public/images/wechat-qr.jpg\") / 1024:.1f} KB')"
+```text
+D:\Projects\个人网站\src\assets\images\wechat-qr.png
 ```
 
-### 4. 重新构建网站
-图片放置后，重新构建网站：
-```bash
-cd d:/Obsidian/lzj-notes/website
-npm run build
+页面引用位置：
+
+```text
+src/components/Contact.astro
 ```
 
-### 5. 预览效果
-启动本地服务器查看效果：
-```bash
-npm run dev
+Astro 会在构建时自动生成优化后的 WebP 文件。当前构建后的二维码约为 43.5 KB。
+
+## 更换二维码
+
+1. 准备新的正方形二维码图片。
+2. 使用同名文件覆盖：
+
+   ```text
+   D:\Projects\个人网站\src\assets\images\wechat-qr.png
+   ```
+
+3. 重新构建：
+
+   ```powershell
+   cd "D:\Projects\个人网站"
+   npm run build
+   ```
+
+4. 启动生产预览：
+
+   ```powershell
+   npm run preview -- --host 127.0.0.1 --port 4323
+   ```
+
+5. 打开联系区，确认二维码清晰、没有裁切并且可以正常识别。
+
+## 文件检查
+
+```powershell
+Get-Item "D:\Projects\个人网站\src\assets\images\wechat-qr.png"
 ```
 
-然后访问 http://localhost:4322 查看二维码是否正确显示。
-
-## 替代方案
-
-如果您无法直接放置图片，可以：
-
-1. **使用在线图片**: 将二维码图片上传到图床，然后修改 `src/components/Contact.astro` 中的图片链接
-2. **使用占位符**: 暂时保持当前的占位符样式
-
-## 技术细节
-
-二维码在网站中的位置：
-- **文件**: `src/components/Contact.astro`
-- **CSS类**: `.contact-qr-img`
-- **样式**: 圆角、边框、悬停效果
-
-## 联系方式
-
-如果遇到问题，请检查：
-1. 图片文件名是否正确
-2. 图片路径是否正确
-3. 图片格式是否支持
-4. 文件权限是否正确
+二维码由 `Contact.astro` 使用 Astro `Image` 组件加载。不要再把重复副本放入 `public/images/`，避免构建产物和维护路径混乱。

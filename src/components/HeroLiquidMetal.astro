@@ -1,0 +1,114 @@
+<div class="visual-story-layer" data-liquid-metal data-webgl="loading" aria-hidden="true">
+  <div class="hero-liquid-fallback"></div>
+  <canvas class="hero-liquid-canvas" tabindex="-1"></canvas>
+  <div class="hero-liquid-vignette"></div>
+</div>
+
+<style>
+  .visual-story-layer {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: #080807;
+  }
+
+  .hero-liquid-fallback,
+  .hero-liquid-canvas,
+  .hero-liquid-vignette {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-liquid-fallback {
+    background:
+      radial-gradient(ellipse 48% 64% at 94% 45%, rgba(201, 165, 92, 0.12), transparent 68%),
+      radial-gradient(ellipse 38% 52% at 18% 82%, rgba(87, 64, 27, 0.08), transparent 72%);
+    opacity: 1;
+    transition: opacity 0.6s ease;
+  }
+
+  .hero-liquid-canvas {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .visual-story-layer[data-webgl='ready'] .hero-liquid-canvas {
+    opacity: 1;
+  }
+
+  .visual-story-layer[data-webgl='ready'] .hero-liquid-fallback {
+    opacity: 0.18;
+  }
+
+  .hero-liquid-vignette {
+    box-shadow: inset 0 0 190px 64px rgba(0, 0, 0, 0.62);
+  }
+
+  .visual-story-layer[data-webgl='fallback'] .hero-liquid-canvas {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero-liquid-vignette {
+      box-shadow: inset 0 0 100px 28px rgba(0, 0, 0, 0.52);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-liquid-canvas,
+    .hero-liquid-fallback {
+      transition: none;
+    }
+
+  }
+</style>
+
+<script>
+  import { createLiquidMetalScene } from '../lib/liquid-metal-scene';
+  import { createVisualStoryController } from '../lib/visual-story-controller';
+
+  const root = document.querySelector<HTMLElement>('[data-liquid-metal]');
+  const canvas = root?.querySelector<HTMLCanvasElement>('.hero-liquid-canvas');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (root && canvas) {
+    let sceneController: ReturnType<typeof createLiquidMetalScene> | null = null;
+    let storyController: ReturnType<typeof createVisualStoryController> | null = null;
+    let cleanedUp = false;
+
+    const cleanup = () => {
+      if (cleanedUp) return;
+      cleanedUp = true;
+      storyController?.dispose();
+      sceneController?.dispose();
+    };
+
+    try {
+      sceneController = createLiquidMetalScene({
+        canvas,
+        host: root,
+        reducedMotion,
+      });
+      root.dataset.webgl = 'ready';
+    } catch (error) {
+      root.dataset.webgl = 'fallback';
+      console.warn('Liquid metal scene fell back to CSS rendering.', error);
+    }
+
+    storyController = createVisualStoryController({
+      root: document.documentElement,
+      onUpdate: ({ index, progress }) => {
+        sceneController?.setSection(index);
+        sceneController?.setSectionProgress(progress);
+      },
+    });
+
+    window.addEventListener('pagehide', cleanup, { once: true });
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  }
+</script>

@@ -1,0 +1,203 @@
+---
+const chapters = [
+  { section: 'hero', target: 'hero', label: '首页' },
+  { section: 'whyme', target: 'whyme', label: '能力' },
+  { section: 'roi', target: 'roi', label: '收益' },
+  { section: 'cases', target: 'cases', label: '案例' },
+  { section: 'certificates', target: 'certs', label: '认证' },
+  { section: 'services', target: 'services', label: '服务' },
+  { section: 'process', target: 'process', label: '流程' },
+  { section: 'faq', target: 'faq', label: '答疑' },
+  { section: 'contact', target: 'contact', label: '联系' },
+];
+---
+
+<nav class="story-rail" data-story-rail aria-label="页面章节导航">
+  <div class="story-rail-track" aria-hidden="true">
+    <span class="story-rail-fill" data-story-rail-fill></span>
+  </div>
+  <ol class="story-rail-list">
+    {chapters.map(({ section, target, label }, index) => (
+      <li class="story-rail-item" data-story-rail-item={section}>
+        <a
+          class="story-rail-link"
+          href={`#${target}`}
+          aria-label={`跳转到第 ${index + 1} 章：${label}`}
+        >
+          <span class="story-rail-index">{String(index + 1).padStart(2, '0')}</span>
+          <span class="story-rail-dot" aria-hidden="true"></span>
+          <span class="story-rail-label">{label}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .story-rail {
+    position: fixed;
+    z-index: 20;
+    top: 50%;
+    right: 18px;
+    display: flex;
+    align-items: stretch;
+    gap: 9px;
+    height: 306px;
+    color: var(--text-muted);
+    transform: translateY(-50%);
+    pointer-events: auto;
+  }
+
+  .story-rail-track {
+    position: relative;
+    width: 1px;
+    margin: 12px 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+  }
+
+  .story-rail-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(180deg, #ead38d, var(--accent), rgba(201, 165, 92, 0.22));
+    box-shadow: 0 0 10px rgba(201, 165, 92, 0.38);
+    transition: height 0.16s linear;
+  }
+
+  .story-rail-list {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    list-style: none;
+  }
+
+  .story-rail-item {
+    min-width: 82px;
+    opacity: 0.62;
+    transition: opacity 0.35s ease, color 0.35s ease;
+  }
+
+  .story-rail-link {
+    display: grid;
+    grid-template-columns: 22px 7px 38px;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+    height: 100%;
+    padding: 0 4px;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .story-rail-link:hover {
+    color: inherit;
+  }
+
+  .story-rail-index {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-align: right;
+  }
+
+  .story-rail-dot {
+    width: 5px;
+    height: 5px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    transition: transform 0.35s var(--ease-out), background 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .story-rail-label {
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(5px);
+    transition: opacity 0.35s ease, transform 0.35s var(--ease-out);
+  }
+
+  .story-rail-item.story-complete {
+    opacity: 0.82;
+    color: rgba(201, 165, 92, 0.78);
+  }
+
+  .story-rail-item.story-active {
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .story-rail-item.story-active .story-rail-dot {
+    background: #ead38d;
+    transform: scale(1.55);
+    box-shadow: 0 0 12px rgba(201, 165, 92, 0.64);
+  }
+
+  .story-rail-item.story-active .story-rail-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .story-rail-item:hover,
+  .story-rail-item:focus-within {
+    opacity: 0.9;
+  }
+
+  .story-rail-item:hover .story-rail-label,
+  .story-rail-item:focus-within .story-rail-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .story-rail-link:focus-visible {
+    outline-offset: 1px;
+  }
+
+  @media (max-width: 1280px), (pointer: coarse) {
+    .story-rail {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .story-rail-fill,
+    .story-rail-item,
+    .story-rail-dot,
+    .story-rail-label {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const rail = document.querySelector<HTMLElement>('[data-story-rail]');
+
+  if (rail && !rail.dataset.storyBound) {
+    rail.dataset.storyBound = 'true';
+    const items = Array.from(rail.querySelectorAll<HTMLElement>('[data-story-rail-item]'));
+    const fill = rail.querySelector<HTMLElement>('[data-story-rail-fill]');
+
+    window.addEventListener('visual-story:update', (event) => {
+      const detail = (event as CustomEvent<{ index: number }>).detail;
+      const scrollRange = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const overallProgress = (window.scrollY / scrollRange) * 100;
+      fill?.style.setProperty('height', `${Math.min(100, Math.max(0, overallProgress)).toFixed(2)}%`);
+
+      items.forEach((item, index) => {
+        const isActive = index === detail.index;
+        const link = item.querySelector<HTMLAnchorElement>('.story-rail-link');
+
+        item.classList.toggle('story-complete', index < detail.index);
+        item.classList.toggle('story-active', isActive);
+
+        if (isActive) {
+          link?.setAttribute('aria-current', 'location');
+        } else {
+          link?.removeAttribute('aria-current');
+        }
+      });
+    });
+  }
+</script>

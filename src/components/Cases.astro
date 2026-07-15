@@ -2,7 +2,7 @@
 // Cases Section — Real achievements with data
 ---
 
-<section class="section cases" id="cases">
+<section class="section cases" id="cases" data-story-section="cases">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label">实战案例</span>
@@ -12,9 +12,14 @@
       </p>
     </div>
 
+    <div class="cases-track" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </div>
+
     <div class="cases-grid">
       <!-- Case 1: MPE 智能床 -->
-      <div class="case-card card reveal">
+      <div class="case-card card reveal" data-case-story="0">
         <div class="case-header">
           <div class="case-header-left">
             <span class="case-brand" style="--brand-color: #2d8cf0">MPE</span>
@@ -40,10 +45,23 @@
             <span class="case-metric-label">数据整理时间降幅</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="case-detail-trigger"
+          data-case-detail-trigger="mpe"
+          aria-haspopup="dialog"
+          aria-controls="caseStudyDrawer"
+          aria-expanded="false"
+        >
+          查看案例拆解
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
 
       <!-- Case 2: 爱汤米家居 -->
-      <div class="case-card card reveal reveal-delay-1">
+      <div class="case-card card reveal reveal-delay-1" data-case-story="1">
         <div class="case-header">
           <div class="case-header-left">
             <span class="case-brand" style="--brand-color: #e85d26">爱汤米</span>
@@ -69,10 +87,23 @@
             <span class="case-metric-label">单月最高留资</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="case-detail-trigger"
+          data-case-detail-trigger="aitangmi"
+          aria-haspopup="dialog"
+          aria-controls="caseStudyDrawer"
+          aria-expanded="false"
+        >
+          查看案例拆解
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
 
       <!-- Case 3: YouTube Shorts -->
-      <div class="case-card card reveal reveal-delay-2">
+      <div class="case-card card reveal reveal-delay-2" data-case-story="2">
         <div class="case-header">
           <div class="case-header-left">
             <span class="case-brand" style="--brand-color: #ff0000">YT</span>
@@ -98,10 +129,23 @@
             <span class="case-metric-label">独立操盘</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="case-detail-trigger"
+          data-case-detail-trigger="youtube"
+          aria-haspopup="dialog"
+          aria-controls="caseStudyDrawer"
+          aria-expanded="false"
+        >
+          查看案例拆解
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
 
       <!-- Case 4: 欧派家居 -->
-      <div class="case-card card reveal reveal-delay-3">
+      <div class="case-card card reveal reveal-delay-3" data-case-story="3">
         <div class="case-header">
           <div class="case-header-left">
             <span class="case-brand" style="--brand-color: #003399">欧派</span>
@@ -127,10 +171,23 @@
             <span class="case-metric-label">粉丝增长</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="case-detail-trigger"
+          data-case-detail-trigger="oppein"
+          aria-haspopup="dialog"
+          aria-controls="caseStudyDrawer"
+          aria-expanded="false"
+        >
+          查看案例拆解
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
 
       <!-- Case 5: 栖案柜小程序 -->
-      <div class="case-card card reveal reveal-delay-4">
+      <div class="case-card card reveal reveal-delay-4" data-case-story="4">
         <div class="case-header">
           <div class="case-header-left">
             <span class="case-brand" style="--brand-color: #52c41a">栖案柜</span>
@@ -156,10 +213,23 @@
             <span class="case-metric-label">协作完成</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="case-detail-trigger"
+          data-case-detail-trigger="qian"
+          aria-haspopup="dialog"
+          aria-controls="caseStudyDrawer"
+          aria-expanded="false"
+        >
+          查看案例拆解
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
 
       <!-- Case 6: OrbitOS -->
-      <div class="case-card card reveal reveal-delay-5">
+      <div class="case-card card reveal reveal-delay-5" data-case-story="5">
         <div class="case-header">
           <div class="case-header-left">
             <span class="case-brand" style="--brand-color: #c9a55c">OrbitOS</span>
@@ -185,23 +255,174 @@
             <span class="case-metric-label">模板</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="case-detail-trigger"
+          data-case-detail-trigger="orbitos"
+          aria-haspopup="dialog"
+          aria-controls="caseStudyDrawer"
+          aria-expanded="false"
+        >
+          查看案例拆解
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  .cases {
+    overflow: hidden;
+  }
+
+  .cases > .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cases-track {
+    position: absolute;
+    z-index: 1;
+    inset: 260px max(24px, calc((100% - var(--container-width)) / 2 + 12px)) 84px;
+    pointer-events: none;
+  }
+
+  .cases-track span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(201, 165, 92, 0.34) 14%,
+      rgba(201, 165, 92, 0.08) 78%,
+      transparent
+    );
+    box-shadow: 0 0 18px rgba(201, 165, 92, 0.14);
+    opacity: 0.42;
+  }
+
+  .cases-track span:first-child {
+    left: 2px;
+    transform: rotate(-1.3deg);
+  }
+
+  .cases-track span:last-child {
+    right: 2px;
+    transform: rotate(1.3deg);
+  }
+
   .cases-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    perspective: 1400px;
   }
 
   .case-card {
+    --case-depth: 20px;
     padding: 32px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1200px) translate3d(0, 26px, var(--case-depth));
+    border-color: rgba(201, 165, 92, 0.08);
+    transition:
+      transform 0.68s var(--ease-out),
+      border-color 0.45s ease,
+      box-shadow 0.45s ease,
+      background 0.45s ease;
+  }
+
+  .case-card:nth-child(even) {
+    --case-depth: -34px;
+  }
+
+  .case-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(234, 211, 141, 0.82), transparent);
+    opacity: 0;
+    transform: scaleY(0.1);
+    transition: opacity 0.45s ease, transform 0.75s var(--ease-out);
+  }
+
+  .case-card:nth-child(even)::before {
+    left: auto;
+    right: 0;
+  }
+
+  .case-card.story-active {
+    transform: perspective(1200px) translate3d(0, 0, 0);
+    border-color: rgba(201, 165, 92, 0.3);
+    background:
+      linear-gradient(145deg, rgba(201, 165, 92, 0.045), transparent 42%),
+      var(--bg-card);
+    box-shadow:
+      0 22px 64px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(234, 211, 141, 0.08);
+  }
+
+  .case-card.story-active::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  .case-card.story-active .case-metric-value {
+    text-shadow: 0 0 22px rgba(201, 165, 92, 0.24);
+  }
+
+  .case-card:first-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+    column-gap: 52px;
+    padding: 42px;
+  }
+
+  .case-card:first-child .case-header,
+  .case-card:first-child .case-title,
+  .case-card:first-child .case-desc {
+    grid-column: 1;
+  }
+
+  .case-card:first-child .case-title {
+    font-size: 26px;
+  }
+
+  .case-card:first-child .case-desc {
+    font-size: 15px;
+    max-width: 680px;
+  }
+
+  .case-card:first-child .case-metrics {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 0 8px 36px;
+    border-top: 0;
+    border-left: 1px solid var(--border);
+  }
+
+  .case-card:first-child .case-detail-trigger {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .case-card:first-child .case-metric-value {
+    font-size: 30px;
   }
 
   .case-header {
@@ -276,9 +497,47 @@
   }
 
   .case-metric-label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-muted);
     font-weight: 500;
+  }
+
+  .case-detail-trigger {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
+    min-height: 36px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: color 0.25s ease;
+  }
+
+  .case-detail-trigger svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .case-detail-trigger:hover,
+  .case-detail-trigger:focus-visible {
+    color: var(--accent-hover);
+  }
+
+  .case-detail-trigger:hover svg,
+  .case-detail-trigger:focus-visible svg {
+    transform: translateX(4px);
   }
 
   @media (max-width: 1024px) {
@@ -288,12 +547,51 @@
   }
 
   @media (max-width: 768px) {
+    .cases-track {
+      display: none;
+    }
+
     .cases-grid {
       grid-template-columns: 1fr;
     }
 
     .case-card {
       padding: 24px;
+      transform: translateY(18px);
+    }
+
+    .case-card:first-child {
+      display: flex;
+      grid-column: auto;
+      padding: 24px;
+    }
+
+    .case-card:first-child .case-title {
+      font-size: 18px;
+    }
+
+    .case-card:first-child .case-desc {
+      font-size: 14px;
+    }
+
+    .case-card:first-child .case-metrics {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 20px 0 0;
+      border-top: 1px solid var(--border);
+      border-left: 0;
+    }
+
+    .case-card:first-child .case-detail-trigger {
+      align-self: flex-start;
+    }
+
+    .case-card:first-child .case-metric-value {
+      font-size: 18px;
+    }
+
+    .case-card.story-active {
+      transform: translateY(0);
     }
 
     .case-title {
@@ -308,4 +606,31 @@
       font-size: 18px;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-card,
+    .case-card.story-active {
+      transform: none;
+    }
+  }
 </style>
+
+<script>
+  const casesSection = document.querySelector<HTMLElement>('[data-story-section="cases"]');
+
+  if (casesSection && !casesSection.dataset.storyBound) {
+    casesSection.dataset.storyBound = 'true';
+    const cards = Array.from(casesSection.querySelectorAll<HTMLElement>('[data-case-story]'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('visual-story:update', (event) => {
+      const detail = (event as CustomEvent<{ section: string; progress: number }>).detail;
+      if (detail.section !== 'cases') return;
+
+      cards.forEach((card, index) => {
+        const threshold = 0.04 + index * 0.13;
+        card.classList.toggle('story-active', reducedMotion || detail.progress >= threshold);
+      });
+    });
+  }
+</script>

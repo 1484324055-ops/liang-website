@@ -1,0 +1,462 @@
+<div class="case-drawer" id="caseStudyDrawer" data-case-drawer aria-hidden="true">
+  <button
+    type="button"
+    class="case-drawer-backdrop"
+    data-case-drawer-close
+    aria-label="关闭案例详情"
+    tabindex="-1"
+  ></button>
+
+  <section
+    class="case-drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="caseDrawerTitle"
+    tabindex="-1"
+  >
+    <button
+      type="button"
+      class="case-drawer-close"
+      data-case-drawer-close
+      aria-label="关闭案例详情"
+      title="关闭"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+
+    <div class="case-drawer-content">
+      <div class="case-drawer-meta">
+        <span class="case-drawer-category" data-case-category></span>
+        <span class="case-drawer-period" data-case-period></span>
+      </div>
+
+      <p class="case-drawer-brand" data-case-brand></p>
+      <h2 id="caseDrawerTitle" data-case-title></h2>
+      <p class="case-drawer-summary" data-case-summary></p>
+
+      <div class="case-drawer-sections">
+        <section>
+          <span>业务场景</span>
+          <p data-case-scene></p>
+        </section>
+        <section>
+          <span>核心动作</span>
+          <p data-case-action></p>
+        </section>
+        <section>
+          <span>关键结果</span>
+          <p data-case-result></p>
+        </section>
+        <section>
+          <span>能力对应</span>
+          <p data-case-capability></p>
+        </section>
+      </div>
+
+      <a href="#contact" class="btn btn-primary case-drawer-cta" data-case-drawer-cta>
+        咨询相似方案
+      </a>
+    </div>
+  </section>
+</div>
+
+<style>
+  :global(html.case-drawer-open),
+  :global(body.case-drawer-open) {
+    overflow: hidden;
+  }
+
+  .case-drawer {
+    position: fixed;
+    z-index: 220;
+    inset: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .case-drawer.is-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .case-drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, 0.72);
+    opacity: 0;
+    cursor: default;
+    transition: opacity 0.38s ease;
+  }
+
+  .case-drawer.is-open .case-drawer-backdrop {
+    opacity: 1;
+  }
+
+  .case-drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(560px, 100%);
+    height: 100%;
+    overflow-y: auto;
+    border: 0;
+    border-left: 1px solid rgba(201, 165, 92, 0.25);
+    background:
+      linear-gradient(145deg, rgba(201, 165, 92, 0.055), transparent 34%),
+      #111;
+    box-shadow: -30px 0 90px rgba(0, 0, 0, 0.56);
+    transform: translateX(100%);
+    transition: transform 0.48s var(--ease-out);
+  }
+
+  .case-drawer.is-open .case-drawer-panel {
+    transform: translateX(0);
+  }
+
+  .case-drawer-close {
+    position: sticky;
+    z-index: 2;
+    top: 18px;
+    left: calc(100% - 58px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 18px 18px -40px auto;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: rgba(17, 17, 17, 0.9);
+    color: var(--text-secondary);
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .case-drawer-close:hover,
+  .case-drawer-close:focus-visible {
+    color: var(--text-primary);
+    border-color: rgba(201, 165, 92, 0.42);
+    background: rgba(201, 165, 92, 0.08);
+  }
+
+  .case-drawer-close svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .case-drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 100%;
+    padding: 68px 52px 48px;
+  }
+
+  .case-drawer-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .case-drawer-category {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.6px;
+  }
+
+  .case-drawer-period {
+    color: var(--text-muted);
+  }
+
+  .case-drawer-brand {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .case-drawer h2 {
+    max-width: 460px;
+    font-size: 34px;
+    line-height: 1.22;
+    letter-spacing: 0;
+  }
+
+  .case-drawer-summary {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .case-drawer-sections {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+  }
+
+  .case-drawer-sections section {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .case-drawer-sections section:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-drawer-sections span {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.5px;
+  }
+
+  .case-drawer-sections p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .case-drawer-cta {
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  @media (max-width: 640px) {
+    .case-drawer-panel {
+      width: 100%;
+      border-left: 0;
+    }
+
+    .case-drawer-content {
+      padding: 64px 24px 32px;
+    }
+
+    .case-drawer h2 {
+      font-size: 28px;
+    }
+
+    .case-drawer-sections section {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-drawer-backdrop,
+    .case-drawer-panel {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  interface CaseDetail {
+    brand: string;
+    category: string;
+    period: string;
+    title: string;
+    summary: string;
+    scene: string;
+    action: string;
+    result: string;
+    capability: string;
+  }
+
+  const caseDetails: Record<string, CaseDetail> = {
+    mpe: {
+      brand: 'MPE 智能床',
+      category: 'AI + 投放',
+      period: '2025.11 — 至今',
+      title: '获客成本最高降低 80%',
+      summary: '把投放数据整理纳入 AI 工作流，同时改善线索成本与人工处理效率。',
+      scene: '家居品牌冷启动投放，需要持续获取高意向线索，并减少每天重复整理投放数据的时间。',
+      action: '重构投放数据的汇总与复盘流程，让 AI 工作流承担高频、重复的数据整理环节。',
+      result: '每天 2 小时的数据整理压到 10 分钟；冷启动 2 个月累计高意向线索 200+ 条；深圳单条成本由 200 元降至 50 元，全国降至 30–40 元。',
+      capability: 'AI 工作流设计 · 投放数据处理 · 家居获客',
+    },
+    aitangmi: {
+      brand: '爱汤米家居',
+      category: '直播获客',
+      period: '2022.10 — 2024.03',
+      title: '从 3 人团队发展到 40+ 人',
+      summary: '从零搭建直播获客体系，把账号起号、留资与团队扩张连接成完整业务流程。',
+      scene: '团队从 3 人起步，需要建立能够持续起号、获取线索并支撑销售转化的直播获客体系。',
+      action: '从零推进直播获客流程，验证账号起号方法，并伴随业务增长扩充执行团队。',
+      result: '7 个账号起号成功 6 个；单月单账号最高 1000+ 留资；最高单月变现 150 万；2023 年全年销售额 5000 万。',
+      capability: '直播获客体系 · 团队搭建 · 业务增长',
+    },
+    youtube: {
+      brand: 'YouTube Shorts',
+      category: 'AI 内容',
+      period: '2026.04',
+      title: '一个人半个月做到 500 万+ 播放',
+      summary: '验证单人借助 AI 批量生产短视频内容的可行性与规模化能力。',
+      scene: '在单人执行条件下，需要快速验证 AI 内容是否能够稳定生产并获得规模化播放。',
+      action: '使用 Seedance 2.0 批量生成游戏 IP 二创视频，建立短视频连续生产流程。',
+      result: '15 天累计获得 500 万+ 播放，全程由 1 人独立操盘。',
+      capability: 'AI 内容生产 · 短视频工作流 · 单人规模化执行',
+    },
+    oppein: {
+      brand: '欧派家居',
+      category: '投放优化',
+      period: '2024.07 — 2025.04',
+      title: '获客成本低于行业水平 30%+',
+      summary: '围绕线索获取与账号增长推进投放优化，在首月完成线索和业绩突破。',
+      scene: '家居业务需要在控制单条线索成本的同时，提升账号影响力和销售转化结果。',
+      action: '围绕获客成本、线索数量和账号增长持续优化投放执行。',
+      result: '首月超额完成 200 条线索并创造 30 万业绩；单条获客成本 130–140 元；账号粉丝从数百增长至 10000+。',
+      capability: '家居投放 · 获客优化 · 账号增长',
+    },
+    qian: {
+      brand: '栖案柜',
+      category: 'AI 产品',
+      period: '2026',
+      title: '0 编程基础独立上线微信小程序',
+      summary: '通过多种 AI 编程工具协作，把全屋定制效果图 Prompt 需求转化为可用产品。',
+      scene: '在没有传统编程基础的情况下，需要独立完成一款全屋定制 AI 效果图 Prompt 生成工具。',
+      action: '使用 OpenCode、Codex、GitHub 与 Vercel 协作完成产品开发和上线流程。',
+      result: '微信小程序已通过审核并正式上线，开发过程由个人通过 AI 协作完成。',
+      capability: 'AI 编程协作 · 产品落地 · 微信小程序',
+    },
+    orbitos: {
+      brand: 'OrbitOS',
+      category: '系统基建',
+      period: '2025.11 — 至今',
+      title: '多 AI 协作知识管理系统',
+      summary: '把目录、模板、Skill、自动化和协作规范组合成一套长期运行的个人知识系统。',
+      scene: '多个 AI 工具共同参与知识管理时，需要统一目录、格式、动作和协作边界。',
+      action: '搭建 12 类目录架构、5 套模板、30+ Skill、Hook 自动化与多 AI 协作规范。',
+      result: '形成一套支持多 AI 持续协作、知识沉淀和工作流复用的 OrbitOS 系统。',
+      capability: '知识管理架构 · Agent 协作 · 自动化规则',
+    },
+  };
+
+  const drawer = document.querySelector<HTMLElement>('[data-case-drawer]');
+
+  if (drawer && !drawer.dataset.drawerBound) {
+    drawer.dataset.drawerBound = 'true';
+    const panel = drawer.querySelector<HTMLElement>('.case-drawer-panel');
+    const triggers = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('[data-case-detail-trigger]'),
+    );
+    const closeButtons = Array.from(
+      drawer.querySelectorAll<HTMLButtonElement>('[data-case-drawer-close]'),
+    );
+    const closeControl = drawer.querySelector<HTMLButtonElement>('.case-drawer-close');
+    const cta = drawer.querySelector<HTMLAnchorElement>('[data-case-drawer-cta]');
+    const fields = {
+      brand: drawer.querySelector<HTMLElement>('[data-case-brand]'),
+      category: drawer.querySelector<HTMLElement>('[data-case-category]'),
+      period: drawer.querySelector<HTMLElement>('[data-case-period]'),
+      title: drawer.querySelector<HTMLElement>('[data-case-title]'),
+      summary: drawer.querySelector<HTMLElement>('[data-case-summary]'),
+      scene: drawer.querySelector<HTMLElement>('[data-case-scene]'),
+      action: drawer.querySelector<HTMLElement>('[data-case-action]'),
+      result: drawer.querySelector<HTMLElement>('[data-case-result]'),
+      capability: drawer.querySelector<HTMLElement>('[data-case-capability]'),
+    };
+    let activeTrigger: HTMLButtonElement | null = null;
+
+    const setField = (element: HTMLElement | null, value: string) => {
+      if (element) element.textContent = value;
+    };
+
+    const closeDrawer = (restoreFocus = true) => {
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('case-drawer-open');
+      document.body.classList.remove('case-drawer-open');
+      activeTrigger?.setAttribute('aria-expanded', 'false');
+
+      if (restoreFocus) activeTrigger?.focus();
+      activeTrigger = null;
+    };
+
+    const openDrawer = (trigger: HTMLButtonElement, detail: CaseDetail) => {
+      activeTrigger?.setAttribute('aria-expanded', 'false');
+      activeTrigger = trigger;
+      activeTrigger.setAttribute('aria-expanded', 'true');
+
+      setField(fields.brand, detail.brand);
+      setField(fields.category, detail.category);
+      setField(fields.period, detail.period);
+      setField(fields.title, detail.title);
+      setField(fields.summary, detail.summary);
+      setField(fields.scene, detail.scene);
+      setField(fields.action, detail.action);
+      setField(fields.result, detail.result);
+      setField(fields.capability, detail.capability);
+
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('case-drawer-open');
+      document.body.classList.add('case-drawer-open');
+      panel?.scrollTo({ top: 0 });
+      requestAnimationFrame(() => closeControl?.focus());
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const detail = caseDetails[trigger.dataset.caseDetailTrigger || ''];
+        if (detail) openDrawer(trigger, detail);
+      });
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', () => closeDrawer());
+    });
+
+    cta?.addEventListener('click', () => closeDrawer(false));
+
+    document.addEventListener('keydown', (event) => {
+      if (!drawer.classList.contains('is-open')) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeDrawer();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !panel) return;
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    });
+  }
+</script>

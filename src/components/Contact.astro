@@ -4,7 +4,12 @@ import { Image } from 'astro:assets';
 import wechatQR from '../assets/images/wechat-qr.png';
 ---
 
-<section class="section contact" id="contact">
+<section class="section contact" id="contact" data-story-section="contact">
+  <div class="contact-convergence" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
   <div class="container">
     <div class="contact-layout">
       <!-- Left: CTA -->
@@ -16,7 +21,10 @@ import wechatQR from '../assets/images/wechat-qr.png';
           还是已经有明确的 AI 落地需求，都欢迎来聊。
         </p>
         <div class="contact-qr">
-          <Image src={wechatQR} alt="微信二维码 - 扫码添加阿杰" class="contact-qr-img" loading="lazy" />
+          <div class="contact-qr-frame">
+            <Image src={wechatQR} alt="微信二维码 - 扫码添加阿杰" class="contact-qr-img" loading="lazy" />
+            <span class="contact-qr-ring" aria-hidden="true"></span>
+          </div>
           <span class="contact-qr-hint">扫码添加微信 · 请备注「来自网站」</span>
         </div>
       </div>
@@ -28,7 +36,7 @@ import wechatQR from '../assets/images/wechat-qr.png';
 
         <div class="social-grid">
           <!-- 小红书 -->
-          <a href="https://xhslink.com/m/7htcBmaHvMh" target="_blank" rel="noopener noreferrer" class="social-card card">
+          <a href="https://xhslink.com/m/7htcBmaHvMh" target="_blank" rel="noopener noreferrer" class="social-card card" data-social-story="0">
             <div class="social-icon social-icon-xhs">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M22.405 9.879c.002.016.01.02.07.019h.725a.797.797 0 0 0 .78-.972.794.794 0 0 0-.884-.618.795.795 0 0 0-.692.794c0 .101-.002.666.001.777zm-11.509 4.808c-.203.001-1.353.004-1.685.003a2.528 2.528 0 0 1-.766-.126.025.025 0 0 0-.03.014L7.7 16.127a.025.025 0 0 0 .01.032c.111.06.336.124.495.124.66.01 1.32.002 1.981 0 .01 0 .02-.006.023-.015l.712-1.545a.025.025 0 0 0-.024-.036zM.477 9.91c-.071 0-.076.002-.076.01a.834.834 0 0 0-.01.08c-.027.397-.038.495-.234 3.06-.012.24-.034.389-.135.607-.026.057-.033.042.003.112.046.092.681 1.523.787 1.74.008.015.011.02.017.02.008 0 .033-.026.047-.044.147-.187.268-.391.371-.606.306-.635.44-1.325.486-1.706.014-.11.021-.22.03-.33l.204-2.616.022-.293c.003-.029 0-.033-.03-.034zm7.203 3.757a1.427 1.427 0 0 1-.135-.607c-.004-.084-.031-.39-.235-3.06a.443.443 0 0 0-.01-.082c-.004-.011-.052-.008-.076-.008h-1.48c-.03.001-.034.005-.03.034l.021.293c.076.982.153 1.964.233 2.946.05.4.186 1.085.487 1.706.103.215.223.419.37.606.015.018.037.051.048.049.02-.003.742-1.642.804-1.765.036-.07.03-.055.003-.112zm3.861-.913h-.872a.126.126 0 0 1-.116-.178l1.178-2.625a.025.025 0 0 0-.023-.035l-1.318-.003a.148.148 0 0 1-.135-.21l.876-1.954a.025.025 0 0 0-.023-.035h-1.56c-.01 0-.02.006-.024.015l-.926 2.068c-.085.169-.314.634-.399.938a.534.534 0 0 0-.02.191.46.46 0 0 0 .23.378.981.981 0 0 0 .46.119h.59c.041 0-.688 1.482-.834 1.972a.53.53 0 0 0-.023.172.465.465 0 0 0 .23.398c.15.092.342.12.475.12l1.66-.001c.01 0 .02-.006.023-.015l.575-1.28a.025.025 0 0 0-.024-.035zm-6.93-4.937H3.1a.032.032 0 0 0-.034.033c0 1.048-.01 2.795-.01 6.829 0 .288-.269.262-.28.262h-.74c-.04.001-.044.004-.04.047.001.037.465 1.064.555 1.263.01.02.03.033.051.033.157.003.767.009.938-.014.153-.02.3-.06.438-.132.3-.156.49-.419.595-.765.052-.172.075-.353.075-.533.002-2.33 0-4.66-.007-6.991a.032.032 0 0 0-.032-.032zm11.784 6.896c0-.014-.01-.021-.024-.022h-1.465c-.048-.001-.049-.002-.05-.049v-4.66c0-.072-.005-.07.07-.07h.863c.08 0 .075.004.075-.074V8.393c0-.082.006-.076-.08-.076h-3.5c-.064 0-.075-.006-.075.073v1.445c0 .083-.006.077.08.077h.854c.075 0 .07-.004.07.07v4.624c0 .095.008.084-.085.084-.37 0-1.11-.002-1.304 0-.048.001-.06.03-.06.03l-.697 1.519s-.014.025-.008.036c.006.01.013.008.058.008 1.748.003 3.495.002 5.243.002.03-.001.034-.006.035-.033v-1.539zm4.177-3.43c0 .013-.007.023-.02.024-.346.006-.692.004-1.037.004-.014-.002-.022-.01-.022-.024-.005-.434-.007-.869-.01-1.303 0-.072-.006-.071.07-.07l.733-.003c.041 0 .081.002.12.015.093.025.16.107.165.204.006.431.002 1.153.001 1.153zm2.67.244a1.953 1.953 0 0 0-.883-.222h-.18c-.04-.001-.04-.003-.042-.04V10.21c0-.132-.007-.263-.025-.394a1.823 1.823 0 0 0-.153-.53 1.533 1.533 0 0 0-.677-.71 2.167 2.167 0 0 0-1-.258c-.153-.003-.567 0-.72 0-.07 0-.068.004-.068-.065V7.76c0-.031-.01-.041-.046-.039H17.93s-.016 0-.023.007c-.006.006-.008.012-.008.023v.546c-.008.036-.057.015-.082.022h-.95c-.022.002-.028.008-.03.032v1.481c0 .09-.004.082.082.082h.913c.082 0 .072.128.072.128V11.19s.003.117-.06.117h-1.482c-.068 0-.06.082-.06.082v1.445s-.01.068.064.068h1.457c.082 0 .076-.006.076.079v3.225c0 .088-.007.081.082.081h1.43c.09 0 .082.007.082-.08v-3.27c0-.029.006-.035.033-.035l2.323-.003c.098 0 .191.02.28.061a.46.46 0 0 1 .274.407c.008.395.003.79.003 1.185 0 .259-.107.367-.33.367h-1.218c-.023.002-.029.008-.028.033.184.437.374.871.57 1.303a.045.045 0 0 0 .04.026c.17.005.34.002.51.003.15-.002.517.004.666-.01a2.03 2.03 0 0 0 .408-.075c.59-.18.975-.698.976-1.313v-1.981c0-.128-.01-.254-.034-.38 0 .078-.029-.641-.724-.998z"/>
@@ -44,7 +52,7 @@ import wechatQR from '../assets/images/wechat-qr.png';
           </a>
 
           <!-- 抖音 -->
-          <a href="https://v.douyin.com/n4Uw16gQ4J4/" target="_blank" rel="noopener noreferrer" class="social-card card">
+          <a href="https://v.douyin.com/n4Uw16gQ4J4/" target="_blank" rel="noopener noreferrer" class="social-card card" data-social-story="1">
             <div class="social-icon social-icon-dy">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.98a8.21 8.21 0 0 0 4.76 1.5V7.04a4.84 4.84 0 0 1-1-.35z"/>
@@ -52,7 +60,7 @@ import wechatQR from '../assets/images/wechat-qr.png';
             </div>
             <div class="social-info">
               <span class="social-name">抖音</span>
-              <span class="social-handle">@阿杰 Thinking · 2,932 粉丝</span>
+              <span class="social-handle">@阿杰 Thinking · 3,700 粉丝</span>
             </div>
             <svg class="social-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M4 12l8-8M12 4v8M12 4H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -60,7 +68,7 @@ import wechatQR from '../assets/images/wechat-qr.png';
           </a>
 
           <!-- 公众号 -->
-          <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzNzExMg==#wechat_redirect" target="_blank" rel="noopener noreferrer" class="social-card card">
+          <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzY5NzIzNzExMg==#wechat_redirect" target="_blank" rel="noopener noreferrer" class="social-card card" data-social-story="2">
             <div class="social-icon social-icon-wx">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.045c.133 0 .24-.11.24-.245 0-.06-.024-.12-.04-.178l-.326-1.233a.493.493 0 0 1 .177-.554C23.216 18.504 24 16.92 24 15.176c0-3.33-3.037-6.057-7.062-6.318zm-2.89 2.065c.535 0 .969.44.969.983a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.983.97-.983zm4.844 0c.535 0 .969.44.969.983a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.983.97-.983z"/>
@@ -76,7 +84,7 @@ import wechatQR from '../assets/images/wechat-qr.png';
           </a>
 
           <!-- YouTube -->
-          <a href="https://youtube.com/@zhenjie9267" target="_blank" rel="noopener noreferrer" class="social-card card">
+          <a href="https://youtube.com/@zhenjie9267" target="_blank" rel="noopener noreferrer" class="social-card card" data-social-story="3">
             <div class="social-icon social-icon-yt">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -99,6 +107,50 @@ import wechatQR from '../assets/images/wechat-qr.png';
 <style>
   .contact {
     background: var(--bg-surface);
+    overflow: hidden;
+  }
+
+  .contact > .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .contact-convergence {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .contact.story-active .contact-convergence {
+    opacity: 1;
+  }
+
+  .contact-convergence span {
+    position: absolute;
+    left: 0;
+    width: 45%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 165, 92, 0.46), rgba(234, 211, 141, 0.78));
+    box-shadow: 0 0 16px rgba(201, 165, 92, 0.2);
+    transform-origin: right;
+  }
+
+  .contact-convergence span:nth-child(1) {
+    top: 32%;
+    transform: rotate(12deg);
+  }
+
+  .contact-convergence span:nth-child(2) {
+    top: 52%;
+    transform: rotate(0deg);
+  }
+
+  .contact-convergence span:nth-child(3) {
+    top: 72%;
+    transform: rotate(-12deg);
   }
 
   .contact-layout {
@@ -136,6 +188,17 @@ import wechatQR from '../assets/images/wechat-qr.png';
     align-items: center;
     max-width: 280px;
     width: 100%;
+    position: relative;
+  }
+
+  .contact-qr-frame {
+    position: relative;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(201, 165, 92, 0.2);
+    border-radius: 14px;
+    background: rgba(8, 8, 7, 0.72);
+    transition: transform 0.38s var(--ease-out), box-shadow 0.38s ease;
   }
 
   .contact-qr-img {
@@ -145,12 +208,52 @@ import wechatQR from '../assets/images/wechat-qr.png';
     background: #fff;
     transition: all 0.3s var(--ease-out);
     display: block;
+    position: relative;
+    z-index: 2;
   }
 
-  .contact-qr-img:hover {
+  .contact-qr-frame:hover {
     border-color: var(--accent);
     box-shadow: 0 8px 30px rgba(201, 165, 92, 0.2);
     transform: scale(1.02);
+  }
+
+  .contact-qr-ring {
+    position: absolute;
+    z-index: 1;
+    inset: -4px;
+    border-radius: 18px;
+    padding: 1px;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(201, 165, 92, 0.16) 60deg,
+      rgba(234, 211, 141, 0.86) 92deg,
+      rgba(201, 165, 92, 0.12) 128deg,
+      transparent 180deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    animation: contactRingPulse 8s ease-in-out infinite;
+  }
+
+  .contact.story-active .contact-qr-ring {
+    opacity: 1;
+  }
+
+  @keyframes contactRingPulse {
+    0%, 100% {
+      filter: brightness(0.78) drop-shadow(0 0 5px rgba(201, 165, 92, 0.16));
+    }
+    50% {
+      filter: brightness(1.28) drop-shadow(0 0 13px rgba(201, 165, 92, 0.34));
+    }
   }
 
   .contact-qr-hint {
@@ -186,6 +289,18 @@ import wechatQR from '../assets/images/wechat-qr.png';
     padding: 16px 20px;
     text-decoration: none;
     color: var(--text-primary);
+    opacity: 0.46;
+    transform: translateX(18px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.5s var(--ease-out),
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .social-card.story-active {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .social-card:hover {
@@ -266,6 +381,10 @@ import wechatQR from '../assets/images/wechat-qr.png';
   }
 
   @media (max-width: 768px) {
+    .contact-convergence {
+      display: none;
+    }
+
     .contact-layout {
       grid-template-columns: 1fr;
       gap: 60px;
@@ -304,4 +423,43 @@ import wechatQR from '../assets/images/wechat-qr.png';
       max-width: 240px;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-convergence,
+    .contact.story-active .contact-convergence {
+      display: none;
+    }
+
+    .contact-qr-ring {
+      animation: none;
+      opacity: 0.45;
+    }
+
+    .social-card,
+    .social-card.story-active {
+      opacity: 1;
+      transform: none;
+    }
+  }
 </style>
+
+<script>
+  const contactSection = document.querySelector<HTMLElement>('[data-story-section="contact"]');
+
+  if (contactSection && !contactSection.dataset.storyBound) {
+    contactSection.dataset.storyBound = 'true';
+    const socialCards = Array.from(contactSection.querySelectorAll<HTMLElement>('[data-social-story]'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('visual-story:update', (event) => {
+      const detail = (event as CustomEvent<{ section: string; progress: number }>).detail;
+      const active = detail.section === 'contact';
+      contactSection.classList.toggle('story-active', active);
+      if (!active) return;
+
+      socialCards.forEach((card, index) => {
+        card.classList.toggle('story-active', reducedMotion || detail.progress >= 0.04 + index * 0.12);
+      });
+    });
+  }
+</script>

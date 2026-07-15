@@ -2,7 +2,8 @@
 // ROI Calculator — Interactive investment return estimator
 ---
 
-<section class="section roi" id="roi">
+<section class="section roi" id="roi" data-story-section="roi">
+  <div class="roi-ambient-wave" aria-hidden="true"></div>
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label">投入产出</span>
@@ -15,6 +16,53 @@
 
     <div class="roi-card card reveal reveal-delay-1">
       <div class="roi-inputs">
+        <div class="roi-preset-block">
+          <span class="roi-preset-label">参数预设</span>
+          <div class="roi-presets" role="group" aria-label="ROI 参数预设">
+            <button
+              type="button"
+              class="roi-preset"
+              data-roi-preset="starter"
+              data-cost="120"
+              data-leads="50"
+              data-hours="1.5"
+              aria-pressed="false"
+            >
+              轻量尝试
+            </button>
+            <button
+              type="button"
+              class="roi-preset is-active"
+              data-roi-preset="growth"
+              data-cost="200"
+              data-leads="100"
+              data-hours="3"
+              aria-pressed="true"
+            >
+              成长业务
+            </button>
+            <button
+              type="button"
+              class="roi-preset"
+              data-roi-preset="scale"
+              data-cost="320"
+              data-leads="300"
+              data-hours="5"
+              aria-pressed="false"
+            >
+              高投入团队
+            </button>
+            <button
+              type="button"
+              class="roi-preset"
+              data-roi-preset="custom"
+              aria-pressed="false"
+            >
+              自定义
+            </button>
+          </div>
+        </div>
+
         <!-- 当前获客成本 -->
         <div class="roi-input-group">
           <label class="roi-label" for="costSlider">
@@ -82,6 +130,11 @@
           * 保守估计：获客成本降 30%，数据整理时间省 50%，时薪按 50 元计算
         </div>
 
+        <div class="roi-insight" aria-live="polite">
+          <span class="roi-insight-label">测算解读</span>
+          <p id="roiInsight"></p>
+        </div>
+
         <a href="#contact" class="btn btn-primary roi-cta">获取我的 AI 落地方案</a>
       </div>
     </div>
@@ -91,6 +144,35 @@
 <style>
   .roi {
     background: var(--bg);
+    overflow: hidden;
+  }
+
+  .roi-ambient-wave {
+    position: absolute;
+    z-index: 0;
+    top: 26%;
+    right: -10%;
+    width: min(54vw, 760px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 165, 92, 0.08);
+    box-shadow:
+      0 0 0 42px rgba(201, 165, 92, 0.025),
+      0 0 0 96px rgba(201, 165, 92, 0.018);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease, transform 1s var(--ease-out);
+    pointer-events: none;
+  }
+
+  .roi.story-active .roi-ambient-wave {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .roi > .container {
+    position: relative;
+    z-index: 1;
   }
 
   .roi-card {
@@ -98,12 +180,68 @@
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     padding: 48px;
+    overflow: hidden;
+    border-color: rgba(201, 165, 92, 0.14);
+    background:
+      linear-gradient(145deg, rgba(201, 165, 92, 0.035), transparent 38%),
+      var(--bg-card);
   }
 
   .roi-inputs {
     display: flex;
     flex-direction: column;
     gap: 32px;
+  }
+
+  .roi-preset-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .roi-preset-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .roi-presets {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: rgba(10, 10, 10, 0.42);
+  }
+
+  .roi-preset {
+    min-height: 36px;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .roi-preset:hover,
+  .roi-preset:focus-visible {
+    color: var(--text-primary);
+  }
+
+  .roi-preset.is-active {
+    color: #0a0a0a;
+    background: var(--accent);
+    box-shadow: 0 4px 16px rgba(201, 165, 92, 0.2);
   }
 
   .roi-input-group {
@@ -136,10 +274,18 @@
     appearance: none;
     width: 100%;
     height: 6px;
-    background: var(--border);
+    --slider-progress: 33.33%;
+    background: linear-gradient(
+      90deg,
+      rgba(234, 211, 141, 0.92) 0,
+      var(--accent) var(--slider-progress),
+      var(--border) var(--slider-progress),
+      var(--border) 100%
+    );
     border-radius: 3px;
     outline: none;
     cursor: pointer;
+    box-shadow: 0 0 16px rgba(201, 165, 92, 0.08);
   }
 
   .roi-slider::-webkit-slider-thumb {
@@ -183,6 +329,48 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .roi-results::before,
+  .roi-results::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 76%;
+    top: 46%;
+    width: 180px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 165, 92, 0.16);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+
+  .roi-results::after {
+    width: 270px;
+    border-color: rgba(201, 165, 92, 0.08);
+  }
+
+  .roi-results.is-pulsing::before {
+    animation: roiResultWave 0.72s var(--ease-out) 1;
+  }
+
+  .roi-results.is-pulsing::after {
+    animation: roiResultWave 0.9s var(--ease-out) 0.08s 1;
+  }
+
+  @keyframes roiResultWave {
+    0% {
+      opacity: 0.54;
+      transform: translate(-50%, -50%) scale(0.25);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.18);
+    }
   }
 
   .roi-result-header {
@@ -224,12 +412,71 @@
   .roi-total-value {
     color: var(--accent);
     font-size: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.32s var(--ease-out), text-shadow 0.32s ease;
+  }
+
+  .roi-total-value.is-updating {
+    transform: scale(1.04);
+    text-shadow: 0 0 24px rgba(201, 165, 92, 0.38);
+  }
+
+  .roi-total-value::after {
+    content: '';
+    position: absolute;
+    inset: -20% auto -20% -40%;
+    width: 28%;
+    background: linear-gradient(90deg, transparent, rgba(255, 248, 218, 0.78), transparent);
+    opacity: 0;
+    transform: skewX(-16deg);
+    pointer-events: none;
+  }
+
+  .roi-total-value.is-updating::after {
+    animation: roiValueSweep 0.62s var(--ease-out) 1;
+  }
+
+  @keyframes roiValueSweep {
+    0% {
+      left: -40%;
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.7;
+    }
+    100% {
+      left: 120%;
+      opacity: 0;
+    }
   }
 
   .roi-note {
     font-size: 12px;
     color: var(--text-muted);
     line-height: 1.5;
+  }
+
+  .roi-insight {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .roi-insight-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+
+  .roi-insight p {
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.65;
   }
 
   .roi-cta {
@@ -239,6 +486,12 @@
   }
 
   @media (max-width: 768px) {
+    .roi-ambient-wave {
+      right: -42%;
+      width: 92vw;
+      opacity: 0.45;
+    }
+
     .roi-card {
       grid-template-columns: 1fr;
       padding: 28px 24px;
@@ -247,6 +500,10 @@
 
     .roi-results {
       padding: 24px;
+    }
+
+    .roi-presets {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .roi-result-value {
@@ -259,6 +516,20 @@
 
     .roi-total-value {
       font-size: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .roi-ambient-wave,
+    .roi.story-active .roi-ambient-wave {
+      opacity: 0.35;
+      transform: none;
+    }
+
+    .roi-results::before,
+    .roi-results::after,
+    .roi-total-value::after {
+      display: none;
     }
   }
 </style>
@@ -275,8 +546,47 @@
   const costReduction = document.getElementById('costReduction')!;
   const hoursSaved = document.getElementById('hoursSaved')!;
   const annualValue = document.getElementById('annualValue')!;
+  const roiInsight = document.getElementById('roiInsight')!;
+  const roiSection = document.querySelector<HTMLElement>('[data-story-section="roi"]');
+  const roiResults = roiSection?.querySelector<HTMLElement>('.roi-results');
+  const presetButtons = Array.from(
+    roiSection?.querySelectorAll<HTMLButtonElement>('[data-roi-preset]') || [],
+  );
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let pulseTimer = 0;
 
-  function calculate() {
+  function setActivePreset(preset: string) {
+    presetButtons.forEach((button) => {
+      const isActive = button.dataset.roiPreset === preset;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  function setSliderProgress(slider: HTMLInputElement) {
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const value = parseFloat(slider.value);
+    const progress = ((value - min) / (max - min)) * 100;
+    slider.style.setProperty('--slider-progress', `${progress.toFixed(2)}%`);
+  }
+
+  function triggerResultFeedback() {
+    if (reducedMotion || !roiResults) return;
+    window.clearTimeout(pulseTimer);
+    roiResults.classList.remove('is-pulsing');
+    annualValue.classList.remove('is-updating');
+    requestAnimationFrame(() => {
+      roiResults.classList.add('is-pulsing');
+      annualValue.classList.add('is-updating');
+      pulseTimer = window.setTimeout(() => {
+        roiResults.classList.remove('is-pulsing');
+        annualValue.classList.remove('is-updating');
+      }, 920);
+    });
+  }
+
+  function calculate(animate = true) {
     const cost = parseFloat(costSlider.value);
     const leads = parseFloat(leadsSlider.value);
     const hours = parseFloat(hoursSlider.value);
@@ -285,6 +595,9 @@
     costValue.textContent = `${cost} 元`;
     leadsValue.textContent = `${leads} 条`;
     hoursValue.textContent = `${hours} 小时`;
+    setSliderProgress(costSlider);
+    setSliderProgress(leadsSlider);
+    setSliderProgress(hoursSlider);
 
     // Conservative estimate: 30% cost reduction, 50% time savings
     const costSavingsPerLead = cost * 0.3;
@@ -294,18 +607,47 @@
     const monthlyTimeValue = monthlyHoursSaved * hourlyRate;
     const monthlyTotal = monthlyCostSavings + monthlyTimeValue;
     const annualTotal = monthlyTotal * 12;
+    const workdaysSaved = monthlyHoursSaved / 8;
 
     // Update results
     savingsValue.textContent = `¥${Math.round(monthlyCostSavings).toLocaleString()}`;
     costReduction.textContent = '30%';
     hoursSaved.textContent = `${Math.round(monthlyHoursSaved)} 小时`;
     annualValue.textContent = `¥${Math.round(annualTotal).toLocaleString()}`;
+    roiInsight.textContent =
+      `按当前参数，每月预计综合节省 ¥${Math.round(monthlyTotal).toLocaleString()}，` +
+      `其中可释放约 ${Math.round(monthlyHoursSaved)} 小时，相当于 ${workdaysSaved.toFixed(1)} 个工作日。`;
+    if (animate) triggerResultFeedback();
   }
 
-  costSlider?.addEventListener('input', calculate);
-  leadsSlider?.addEventListener('input', calculate);
-  hoursSlider?.addEventListener('input', calculate);
+  const handleManualInput = () => {
+    setActivePreset('custom');
+    calculate();
+  };
+
+  costSlider?.addEventListener('input', handleManualInput);
+  leadsSlider?.addEventListener('input', handleManualInput);
+  hoursSlider?.addEventListener('input', handleManualInput);
+
+  presetButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const preset = button.dataset.roiPreset || 'custom';
+      setActivePreset(preset);
+
+      if (preset === 'custom') return;
+
+      costSlider.value = button.dataset.cost || costSlider.value;
+      leadsSlider.value = button.dataset.leads || leadsSlider.value;
+      hoursSlider.value = button.dataset.hours || hoursSlider.value;
+      calculate();
+    });
+  });
 
   // Initial calculation
-  calculate();
+  calculate(false);
+
+  window.addEventListener('visual-story:update', (event) => {
+    const detail = (event as CustomEvent<{ section: string }>).detail;
+    roiSection?.classList.toggle('story-active', detail.section === 'roi');
+  });
 </script>

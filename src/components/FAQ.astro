@@ -2,7 +2,7 @@
 // FAQ Section — Collapsible accordion
 ---
 
-<section class="section faq" id="faq">
+<section class="section faq" id="faq" data-story-section="faq">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label">常见问题</span>
@@ -91,6 +91,7 @@
 <style>
   .faq {
     background: var(--bg-surface);
+    overflow: hidden;
   }
 
   .faq-list {
@@ -104,6 +105,42 @@
   .faq-item {
     padding: 0;
     overflow: hidden;
+    position: relative;
+  }
+
+  .faq-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    background: linear-gradient(90deg, transparent, rgba(234, 211, 141, 0.72), transparent) border-box;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  .faq-item.story-flow::after {
+    animation: faqEdgeFlow 0.78s var(--ease-out) 1;
+  }
+
+  @keyframes faqEdgeFlow {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    28% {
+      opacity: 0.72;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
   }
 
   .faq-question {
@@ -193,6 +230,12 @@
       item?.classList.toggle('open');
       btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       answer?.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+
+      if (!isOpen && item && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        item.classList.remove('story-flow');
+        requestAnimationFrame(() => item.classList.add('story-flow'));
+        window.setTimeout(() => item.classList.remove('story-flow'), 820);
+      }
     });
 
     // Keyboard support — Escape to close
